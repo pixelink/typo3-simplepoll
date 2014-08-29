@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-08-01T13:33:08Z" product-name="simplepoll">
+        <header/>
+        <body>
+            <trans-unit id="tx_simplepoll.voteOnlyOnce">
+                <source>You are only allowed to vote once.</source>
+                <target state="translated">Sie dürfen nur einmal abstimmen.</target>
+            </trans-unit>                    
+            <trans-unit id="tx_simplepoll.voteNotNow">
+                <source>You can not vote now. Please try again later.</source>
+                <target state="translated">Sie können im Moment nicht abstimmen. Bitte versuchen Sie es später noch einmal.</target>
+            </trans-unit>                    
+            <trans-unit id="tx_simplepoll.votedDontSeeResultsMessage">
+                <source>Thank you for voting. The results will be shown after the poll has ended.</source>
+                <target state="translated">Vielen Dank für Ihre Stimme. Das Resultat wird nach dem Ablauf der Umfrage angezeigt werden.</target>
+            </trans-unit>                    
+            <trans-unit id="tx_simplepoll.voteButton">
+                <source>Vote</source>
+                <target state="translated">Abstimmen</target>
+            </trans-unit>                    
+            <trans-unit id="tx_simplepoll.showResultsLink">
+                <source>Show Results</source>
+                <target state="translated">Ergebnis anzeigen</target>
+            </trans-unit>                    
+            <trans-unit id="tx_simplepoll.cookiesNeedToBeActivated">
+                <source>In order to vote Cookies have to be enabled in your browser.</source>
+                <target state="translated">Um abstimmen zu können müssen Cookies in Ihrem Browser aktiviert sein.</target>
+            </trans-unit>                    
+        </body>
+    </file>
+</xliff>

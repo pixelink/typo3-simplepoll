@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-08-01T13:33:08Z" product-name="simplepoll">
+        <header/>
+        <body>
+            <trans-unit id="title.description">
+                <source>The text of the answer</source>
+                <target state="translated">Der Text der Frage</target>
+            </trans-unit>
+            <trans-unit id="counter.description">
+                <source>The count of how many times this answer was chosen</source>
+                <target state="translated">Gibt an wie oft für diese Antowort gestimmt wurde</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

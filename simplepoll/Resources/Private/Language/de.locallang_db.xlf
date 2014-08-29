@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-08-01T13:33:08Z" product-name="simplepoll">
+        <header/>
+        <body>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll">
+                <source>Simple Poll</source>
+                <target state="translated">Simple Poll</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.question">
+                <source>Question</source>
+                <target state="translated">Frage</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.image">
+                <source>Image</source>
+                <target state="translated">Bild</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.end_time">
+                <source>End Time</source>
+                <target state="translated">Endzeit</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.show_result_link">
+                <source>Show Result Link</source>
+                <target state="translated">Ergebnis Link anzeigen</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.show_result_after_vote">
+                <source>Show Result After Vote</source>
+                <target state="translated">Ergebnis nach dem Abstimmen anzeigen</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.allow_multiple_vote">
+                <source>Allow Multiple Vote</source>
+                <target state="translated">Mehrfache Abstimmung erlauben</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.answers">
+                <source>Answers</source>
+                <target state="translated">Antworten</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.ip_locks">
+                <source>Ip Locks</source>
+                <target state="translated">gespeicherte IPs</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_answer">
+                <source>Answer</source>
+                <target state="translated">Antworten</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_answer.title">
+                <source>Title</source>
+                <target state="translated">Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_answer.counter">
+                <source>Counter</source>
+                <target state="translated">Zähler</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_iplock">
+                <source>Ip Lock</source>
+                <target state="translated">gespeicherte IPs</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_iplock.address">
+                <source>Address</source>
+                <target state="translated">Adresse</target>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_iplock.timestamp">
+                <source>Timestamp</source>
+                <target state="translated">Zeitstempel</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

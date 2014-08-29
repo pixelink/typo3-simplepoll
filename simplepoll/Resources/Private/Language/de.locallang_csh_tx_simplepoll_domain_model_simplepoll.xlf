@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-08-01T13:33:08Z" product-name="simplepoll">
+        <header/>
+        <body>
+            <trans-unit id="question.description">
+                <source>The question of the poll</source>
+                <target state="translated">Die eigentliche Frage der Umfrage</target>
+            </trans-unit>
+            <trans-unit id="image.description">
+                <source>Optional image of the poll</source>
+                <target state="translated">Ein optionales Bild</target>
+            </trans-unit>
+            <trans-unit id="end_time.description">
+                <source>End time of the poll. After This only the results are displayed.</source>
+                <target state="translated">Zu dieser Zeit endet die Umfrage und nur noch das Ergebnis wird angezeigt.</target>
+            </trans-unit>
+            <trans-unit id="show_result_link.description">
+                <source>Whether or not to display the show results button</source>
+                <target state="translated">Entscheidet ob der Link zum Anzeigen des Ergebnisses eingeblendet werden soll oder nicht</target>
+            </trans-unit>
+            <trans-unit id="show_result_after_vote.description">
+                <source>Show the result after voting</source>
+                <target state="translated">Entscheidet ob das Ergebnis automatisch nach der Stimmabgabe angezeigt wird</target>
+            </trans-unit>
+            <trans-unit id="allow_multiple_vote.description">
+                <source>If a user is allowed to vote several times</source>
+                <target state="translated">Entscheidet ob der Benutzer mehrfach abstimmen darf</target>
+            </trans-unit>
+            <trans-unit id="answers.description">
+                <source>answers</source>
+                <target state="translated">Antworten</target>
+            </trans-unit>
+            <trans-unit id="ip_locks.description">
+                <source>Holds the IP addresses of the voters of the poll</source>
+                <target state="translated">Die IP Adressen der Benutzer die abgestimmt haben</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

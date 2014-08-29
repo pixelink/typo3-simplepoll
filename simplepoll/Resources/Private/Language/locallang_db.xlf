@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2014-08-01T13:33:08Z" product-name="simplepoll">
+        <header/>
+        <body>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll">
+                <source>Simple Poll</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.question">
+                <source>Question</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.image">
+                <source>Image</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.end_time">
+                <source>End Time</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.show_result_link">
+                <source>Show Result Link</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.show_result_after_vote">
+                <source>Show Result After Vote</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.allow_multiple_vote">
+                <source>Allow Multiple Vote</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.answers">
+                <source>Answers</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.ip_locks">
+                <source>Ip Locks</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_answer">
+                <source>Answer</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_answer.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_answer.counter">
+                <source>Counter</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_iplock">
+                <source>Ip Lock</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_iplock.address">
+                <source>Address</source>
+            </trans-unit>
+            <trans-unit id="tx_simplepoll_domain_model_iplock.timestamp">
+                <source>Timestamp</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

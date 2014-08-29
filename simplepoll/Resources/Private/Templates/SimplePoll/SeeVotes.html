@@ -1,0 +1,32 @@
+<f:layout name="Default" />
+
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:v="http://fedext.net/ns/vhs/ViewHelpers"
+     xmlns:flux="http://fedext.net/ns/flux/ViewHelpers"
+     xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
+
+<f:section name="main">
+
+    <div class="simplePollWrap">
+        <div class="simplePollSeeVotes simplePoll-{simplePoll.uid}">
+            <h3>{simplePoll.question}</h3>
+            <ul>
+                <f:for each="{answersArray}" as="answer">
+                    <li>
+                        <div class='simplePollRow'>
+                            <div class='simplePollAnswer'>{answer.title}: </div>
+                            <div class='simplePollPercentBarLimiter'>
+                                <div class='simplePollPercentBar simplePollPercentBarColor-{answer.iteration}' style='width:{answer.percent}%'></div>
+                            </div>
+                            <div class="simplePollPercentText">{answer.percent}%</div>
+                            <div class='clearfix'></div>
+                        </div>
+                    </li>
+                </f:for>
+            </ul>
+        </div>
+    </div>
+
+
+</f:section>
+</div>

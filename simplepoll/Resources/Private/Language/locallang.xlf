@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2014-08-01T13:33:08Z" product-name="simplepoll">
+        <header/>
+        <body>
+            <trans-unit id="tx_simplepoll.voteOnlyOnce">
+                <source>You are only allowed to vote once.</source>
+            </trans-unit>                    
+            <trans-unit id="tx_simplepoll.voteNotNow">
+                <source>You can not vote now. Please try again later.</source>
+            </trans-unit>                    
+            <trans-unit id="tx_simplepoll.votedDontSeeResultsMessage">
+                <source>Thank you for voting. The results will be shown after the poll has ended.</source>
+            </trans-unit>                    
+            <trans-unit id="tx_simplepoll.voteButton">
+                <source>Vote</source>
+            </trans-unit>                    
+            <trans-unit id="tx_simplepoll.showResultsLink">
+                <source>Show Results</source>
+            </trans-unit>                    
+            <trans-unit id="tx_simplepoll.cookiesNeedToBeActivated">
+                <source>In order to vote Cookies have to be enabled in your browser.</source>
+            </trans-unit>                    
+        </body>
+    </file>
+</xliff>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-08-01T13:33:08Z" product-name="simplepoll">
+        <header/>
+        <body>
+            <trans-unit id="address.description">
+                <source>the IP of the voter</source>
+                <target state="translated">Die IP Adresse des Abstimmers</target>
+            </trans-unit>
+            <trans-unit id="timestamp.description">
+                <source>timestamp</source>
+                <target state="translated">Zeitstempel</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

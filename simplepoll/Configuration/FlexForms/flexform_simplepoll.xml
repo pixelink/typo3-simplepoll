@@ -1,0 +1,28 @@
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Poll auswählen</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.simplepoll.uid>
+                        <TCEforms>
+                            <label>Datensatz</label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>tx_simplepoll_domain_model_simplepoll</allowed>
+                                <size>1</size>
+                                <maxitems>1</maxitems>
+                                <minitems>1</minitems>
+                                <show_thumbs>1</show_thumbs>
+                            </config>
+                        </TCEforms>
+                    </settings.simplepoll.uid>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>
