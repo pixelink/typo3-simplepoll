@@ -1,4 +1,10 @@
-typo3-simplepoll
-================
+#typo3-simplepoll
+###An easy to use poll extension for TYPO3 for version 6.2+
 
-As the name states, a simple poll extension for TYPO3
+(will soon be uploaded to TER and documented)
+
+###Features
+* easy to setup
+* flexible to use
+* multi lingual (de/en included)
+* IP and/or cookie protection for multiple votes
