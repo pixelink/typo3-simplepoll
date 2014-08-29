@@ -3,13 +3,13 @@
         <sDEF>
             <ROOT>
                 <TCEforms>
-                    <sheetTitle>Poll auswählen</sheetTitle>
+                    <sheetTitle>Choose Poll</sheetTitle>
                 </TCEforms>
                 <type>array</type>
                 <el>
                     <settings.simplepoll.uid>
                         <TCEforms>
-                            <label>Datensatz</label>
+                            <label>Poll</label>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
