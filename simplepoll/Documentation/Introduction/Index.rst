@@ -9,16 +9,26 @@
 What does it do?
 ================
 
-First of all, if you have any idea how this template can be improved, please, drop a note to our team_. Documentation is written in reST format. Please, refer to Help writing reStructuredText to get some insight regarding syntax and existing reST editors on the market.
+With the release of TYPO3 6.2 we saw the need of a clean and simple poll extension.
 
-.. _team: http://forge.typo3.org/projects/typo3v4-official_extension_template/issues
+There are others like myquizpoll but they are mostly overloaded with features and therefore not easy to use and maintain for editors.
 
-Here should be given a brief overview of the extension. What does it do? What problem does it solve? Who is interested in this? Basically the document includes everything people need to know to decide, if they should go on with this extension.
+Our goal was to keep it as simple as possible
+
+Main Features
+-------------
+
+- easy to setup
+- easy to use
+- protection against multiple votes via cookies or IP address
+- ajax calls for all actions - no page reload
+- easy to cusomize using TypoScript and Fluid templates.
+
 
 .. figure:: ../Images/whatDoesItDo.jpg
 	:width: 646px
 	:alt: What does it do
 
-	Introduction Package just after installation (caption of the image)
 
-	How the Frontend of the Introduction Package looks like just after installation (legend of the image)
+	**Left:** Standard View for the SimplePoll (with optional image).
+	**Right:** Standard View after voting or if the SimplePoll has ended and only the results are displayed.

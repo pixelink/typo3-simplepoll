@@ -45,11 +45,16 @@ Simple Poll
 	:Rendered:
 		|today|
 
-	The content of this document is related to TYPO3,
-	a GNU/GPL CMS/Framework available from `www.typo3.org <http://www.typo3.org/>`_.
 
+Sponsored by `Pixel Ink`_.
 
-	**Table of Contents**
+.. _Pixel Ink: http://www.pixel-ink.de
+
+.. image:: ./Images/pixelink_250_high_res.png
+	:width: 250px
+
+|
+**Table of Contents**
 
 .. toctree::
 	:maxdepth: 5
@@ -57,5 +62,7 @@ Simple Poll
 	:glob:
 
 	Introduction/Index
-	UsersManual/Index
+	EditorsManual/Index
 	AdministratorManual/Index
+
+
