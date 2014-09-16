@@ -1,7 +1,7 @@
 #typo3-simplepoll
 ###An easy to use poll extension for TYPO3 6.2+
 
-(will soon be uploaded to TER and documented)
+(will soon be uploaded to TER)
 
 ###Features
 * easy to setup
