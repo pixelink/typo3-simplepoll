@@ -15,6 +15,10 @@
                 <source>Thank you for voting. The results will be shown after the poll has ended.</source>
                 <target state="translated">Vielen Dank für Ihre Stimme. Das Resultat wird nach dem Ablauf der Umfrage angezeigt werden.</target>
             </trans-unit>                    
+            <trans-unit id="tx_simplepoll.pollNotFound">
+                <source>The chosen poll can not be found.</source>
+                <target state="translated">Die ausgewählte Umfrage konnte nicht gefunden werden.</target>
+            </trans-unit>                    
             <trans-unit id="tx_simplepoll.voteButton">
                 <source>Vote</source>
                 <target state="translated">Abstimmen</target>

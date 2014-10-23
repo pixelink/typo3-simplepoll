@@ -72,6 +72,11 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
     public function listAction() {
         //this selects the poll given in the plugin itself
         $simplePoll = $this->simplePollRepository->findByUid($this->settings['simplepoll']['uid']);
+        if(! $simplePoll)
+        {
+            $message = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_simplepoll.pollNotFound', 'Simplepoll');
+            $this->forward('message', NULL, NULL, array('message' => $message));
+        }
 
         //first check the end time of the poll. if it has already passed, we only show the results.
         $endTime = (int)$simplePoll->getEndTime()->format('U');
