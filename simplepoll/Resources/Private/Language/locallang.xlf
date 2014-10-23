@@ -12,6 +12,9 @@
             <trans-unit id="tx_simplepoll.votedDontSeeResultsMessage">
                 <source>Thank you for voting. The results will be shown after the poll has ended.</source>
             </trans-unit>                    
+            <trans-unit id="tx_simplepoll.pollNotFound">
+                <source>The chosen poll can not be found.</source>
+            </trans-unit>                    
             <trans-unit id="tx_simplepoll.voteButton">
                 <source>Vote</source>
             </trans-unit>                    
