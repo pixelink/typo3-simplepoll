@@ -79,12 +79,15 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         }
 
         //first check the end time of the poll. if it has already passed, we only show the results.
-        $endTime = (int)$simplePoll->getEndTime()->format('U');
-        $currentTime = time();
-        
-        if($currentTime > $endTime)
+        if($simplePoll->getEndTime() != '')
         {
-            $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
+            $endTime = (int)$simplePoll->getEndTime()->format('U');
+            $currentTime = time();
+
+            if($currentTime > $endTime)
+            {
+                $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
+            }
         }
         
         // when using $answer = $simplePoll->getAnswers(), the sorting is always by UID

@@ -53,8 +53,9 @@ Image
 	An optional image.
 |
 
-End Time
+End Time 
 	The time when the SimplePoll should end. After this date no more votes are allowed and only the results are displayed.
+        If you see no poll in frontend, check if the End Time is set to a future Date.
 |
 Show Result Link
 	Option if the link to the results page should be displayed.

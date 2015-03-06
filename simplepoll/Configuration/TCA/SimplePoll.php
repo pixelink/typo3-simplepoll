@@ -122,8 +122,7 @@ $GLOBALS['TCA']['tx_simplepoll_domain_model_simplepoll'] = array(
 				'type' => 'input',
 				'size' => 10,
 				'eval' => 'datetime',
-				'checkbox' => 1,
-				'default' => time()
+				'checkbox' => 1
 			),
 		),
 		'show_result_link' => array(
