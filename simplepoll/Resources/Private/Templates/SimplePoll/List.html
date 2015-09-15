@@ -50,6 +50,7 @@
             function addClickEvents() {
                 // this is the ajax override for the vote button
                 $('#simplePollVote').click(function(e){
+
                     if(cookieBlock == '1' || cookieBlock == 'true'){
                         if(! navigator.cookieEnabled) {
                             alert('Cookies need to be activated.');
@@ -60,10 +61,10 @@
                     if($('input[class=simplePollRadioClass]:checked').length === 0) {
                         return false;
                     }
+
                     var ajaxURL = '<f:uri.action action="vote" controller="SimplePoll" pageType="1121" arguments="{simplePoll:simplePoll}" />';
                     var form = $('form');
                     $.post(ajaxURL, form.serialize(), function(response) {
-                        console.log(response);
                         // replace the contents of the simple poll with the view returned from PHP
                         $('.simplePollWrap').replaceWith($(response).find('.simplePollWrap'));
                         // here we need to check if the returned and replaced view contains a vote/seeVotes button again
@@ -79,7 +80,6 @@
                 $('#simplePollSeeVotes').click(function(e){
                     var ajaxURL = '<f:uri.action action="seeVotes" controller="SimplePoll" pageType="1121" arguments="{simplePoll:simplePoll}" />';
                     $.post(ajaxURL, function(response) {
-                        console.log(response);
                         // replace the contents of the simple poll with the view returned from PHP
                         $('.simplePollWrap').replaceWith($(response).find('.simplePollWrap'));
                     });
