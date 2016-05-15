@@ -1,4 +1,7 @@
-#typo3-simplepoll
+# typo3-simplepoll
+
+<a href="https://codeclimate.com/github/pixelink/typo3-simplepoll"><img src="https://codeclimate.com/github/pixelink/typo3-simplepoll/badges/gpa.svg" /></a>
+
 ###An easy to use poll extension for TYPO3 6.2+
 
 ###Features
