@@ -14,21 +14,21 @@ $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Simple Poll',
 	'description' => 'An easy to setup and use poll system',
 	'category' => 'plugin',
-	'author' => 'Alex Bigott',
+	'author' => 'Alex Bigott / Pixel Ink',
 	'author_email' => 'support@pixel-ink.de',
 	'state' => 'stable',
 	'internal' => '',
 	'uploadfolder' => '1',
 	'createDirs' => '',
-	'clearCacheOnLoad' => 0,
-	'version' => '1.0.4',
-	'constraints' => array(
-		'depends' => array(
-			'typo3' => '6.2.0-7.6.99',
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
+	'clearCacheOnLoad' => 1,
+	'version' => '1.0.5',
+	'constraints' => [
+		'depends' => [
+			'typo3' => '6.2.0 - 7.9.99',
+		],
+		'conflicts' => [
+		],
+		'suggests' => [
+		],
+	],
 );
