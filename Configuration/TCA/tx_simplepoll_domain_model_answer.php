@@ -3,8 +3,31 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$GLOBALS['TCA']['tx_simplepoll_domain_model_answer'] = array(
-	'ctrl' => $GLOBALS['TCA']['tx_simplepoll_domain_model_answer']['ctrl'],
+return array(
+    'ctrl' => array(
+        'title'	=> 'LLL:EXT:simplepoll/Resources/Private/Language/locallang_db.xlf:tx_simplepoll_domain_model_answer',
+        'label' => 'title',
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'cruser_id' => 'cruser_id',
+        'dividers2tabs' => TRUE,
+        'sortby' => 'sorting',
+        'versioningWS' => 2,
+        'versioning_followPages' => TRUE,
+
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
+        'delete' => 'deleted',
+        'enablecolumns' => array(
+            'disabled' => 'hidden',
+            'starttime' => 'starttime',
+            'endtime' => 'endtime',
+        ),
+        'searchFields' => 'title,counter,',
+        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('simplepoll') . 'Resources/Public/Icons/ext_icon.png'
+    ),
+
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, counter',
 	),
@@ -15,7 +38,7 @@ $GLOBALS['TCA']['tx_simplepoll_domain_model_answer'] = array(
 		'1' => array('showitem' => ''),
 	),
 	'columns' => array(
-	
+
 		'sys_language_uid' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
@@ -58,7 +81,7 @@ $GLOBALS['TCA']['tx_simplepoll_domain_model_answer'] = array(
 				'max' => 255,
 			)
 		),
-	
+
 		'hidden' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
@@ -117,7 +140,7 @@ $GLOBALS['TCA']['tx_simplepoll_domain_model_answer'] = array(
 				'eval' => 'int'
 			)
 		),
-		
+
 		'simplepoll' => array(
 			'config' => array(
 				'type' => 'passthrough',
