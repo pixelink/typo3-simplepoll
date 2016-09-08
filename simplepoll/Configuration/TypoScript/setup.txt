@@ -13,6 +13,8 @@ plugin.tx_simplepoll {
 		# rewrittenPropertyMapper = 1
 	}
         settings {
+            # Count Languages seperately
+            countLanguagesSeperately = {$plugin.tx_simplepoll.settings.countLanguagesSeperately}
             # time in seconds before IP Locks are removed
             garbageCollectorInterval = {$plugin.tx_simplepoll.settings.garbageCollectorInterval}
             # block multiple votes from one IP address
