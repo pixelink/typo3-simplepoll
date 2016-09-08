@@ -13,6 +13,8 @@ plugin.tx_simplepoll {
 		storagePid = 37
 	}
         settings {
+            # cat=plugin.tx_simplepoll/settings; type=boolean; label=Count Languages seperately
+            countLanguagesSeperately = 1
             # cat=plugin.tx_simplepoll/settings; type=integer; label=Time in seconds before IP Locks are removed and a user can vote again if allowed
             garbageCollectorInterval = 10
             # cat=plugin.tx_simplepoll/settings; type=boolean; label=Block multiple votes from one IP address

@@ -352,6 +352,13 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
     public function seeVotesAction(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll)
     {
         $allAnswers = $this->answerRepository->findBySimplepoll($simplePoll);
+        
+        // if all languages are meant to be added up, we get the needed counters here
+        if(! $this->settings['countLanguagesSeperately']) 
+        {
+            $allAnswers = $this->answerRepository->findAllLanguageAnswers($simplePoll, $allAnswers);
+        }
+        
         $answerCount = 0;
         $answersCountArray = array();
         foreach($allAnswers as $answer)
