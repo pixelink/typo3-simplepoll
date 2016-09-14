@@ -15,6 +15,13 @@ There are others like myquizpoll but they are mostly overloaded with features an
 
 Our goal was to keep it as simple as possible
 
+Contributors
+-------------
+Alex Bigott - Initial and maintaining development of extension.
+
+Bernhard Berger - Move TCA from ext_tables.php to Configuration/TCA and cleanup.
+
+
 Main Features
 -------------
 
