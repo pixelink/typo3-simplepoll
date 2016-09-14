@@ -295,7 +295,7 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         }
 
         // first or allowed vote from this IP, so add the user to the ip lock list. return true because he is allowed to vote
-        $ipLock = $this->objectManager->get('\Pixelink\Simplepoll\Domain\Model\IpLock');
+        $ipLock = $this->objectManager->get('Pixelink\Simplepoll\Domain\Model\IpLock');
         $ipLock->setAddress($userIp);
         $ipLock->setTimestamp(new \DateTime);
         $simplePoll->addIpLock($ipLock);
