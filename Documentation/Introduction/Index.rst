@@ -21,6 +21,8 @@ Alex Bigott - Initial and maintaining development of extension.
 
 Bernhard Berger - Move TCA from ext_tables.php to Configuration/TCA and cleanup.
 
+Philipp Roski - Passive contributor for IP lock error, external javascript plus fluid code cleanup and extendable templates
+
 
 Main Features
 -------------

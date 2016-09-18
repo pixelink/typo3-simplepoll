@@ -1,10 +1,17 @@
 
 plugin.tx_simplepoll {
-    view {
-        templateRootPath = {$plugin.tx_simplepoll.view.templateRootPath}
-        partialRootPath = {$plugin.tx_simplepoll.view.partialRootPath}
-        layoutRootPath = {$plugin.tx_simplepoll.view.layoutRootPath}
-    }
+        templateRootPaths {
+            0 = EXT:simplepoll/Resources/Private/Templates/
+            1 = {$plugin.tx_simplepoll.view.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:simplepoll/Resources/Private/Partials/
+            1 = {$plugin.tx_simplepoll.view.partialRootPath}
+        }
+        layoutRootPaths {
+            0 = EXT:simplepoll/Resources/Private/Layouts/
+            1 = {$plugin.tx_simplepoll.view.layoutRootPath}
+        }
     persistence {
         storagePid = {$plugin.tx_simplepoll.persistence.storagePid}
     }
@@ -38,6 +45,9 @@ page = PAGE
 page {
     includeCSS {
         simplepoll = EXT:simplepoll/Resources/Public/Css/simplepoll.css
+    }
+    includeJSFooter {
+        simplepoll = EXT:simplepoll/Resources/Public/JavaScript/main.js
     }
 }
 
