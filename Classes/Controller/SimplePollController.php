@@ -373,6 +373,7 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         }
 
         $answersArray = $this->reformatAnswers($allAnswers, $answersCountArray);
+        $this->view->assign('allAnswersCount', $answerCount);
         $this->view->assign('answersArray', $answersArray);
         $this->view->assign('simplePoll', $simplePoll);
     }
@@ -382,8 +383,8 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      *
      * returns a single array which holds all the needed informations to output the result in fluid
      *
-     * @param type $allAnswers
-     * @param type $answersCountArray
+     * @param type $allAnswers 
+     * @param type $answersCountArray array of the answers with their perventage numbers
      * @return type array an array in which the key is the UID and the array items are title, percent and iteration (last is needed for the CSS class)
      */
     protected function reformatAnswers($allAnswers, $answersCountArray)
@@ -394,6 +395,7 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         foreach($allAnswers as $answer)
         {
             $answersArrayUnsorted[$answer->getUid()]['title'] = $answer->getTitle();
+            $answersArrayUnsorted[$answer->getUid()]['counter'] = $answer->getCounter();
             $answersArrayUnsorted[$answer->getUid()]['percent'] = $answersCountArray[$answer->getUid()];
             $answersArrayUnsorted[$answer->getUid()]['iteration'] = $iteration++;
         }

@@ -62,6 +62,9 @@ Show the results after voting - ``[plugin.tx_simplepoll.settings.showResultAfter
 Have the link button to the results without voting - ``[plugin.tx_simplepoll.settings.showResultLink]``
 	Have the link button to the results without voting
 |
+Count Languages Seperately - ``[plugin.tx_simplepoll.settings.countLanguagesSeperately]``
+	Decides wheter the results in a multi language page should be displayed per language chosen or if all results shouls be added up to generate a result that includes all votes for all languages
+|
 Use Typoscript settings instead of plugin values - ``[plugin.tx_simplepoll.settings.useTyposcriptSettings]``
 	If you load the extension via bootstrapper you might want to use this option. It then takes the settings from TypoScript instead of the values in the plugins content element.
 |

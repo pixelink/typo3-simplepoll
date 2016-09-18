@@ -6,6 +6,7 @@
      xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
 
 <f:section name="main">
+    
     <div class="simplePollWrap">
         <div class="simplePollMain simplePoll-{simplePoll.uid}">
             <f:if condition="{simplePoll.image}">
@@ -21,7 +22,7 @@
                             <li>
                                 <f:form.radio value="{answer.uid}" name="simplePollRadio" class="simplePollRadioClass" />
                                 <!--<input type="radio" name="simplePollRadio" value="{answer.uid}" />-->
-                                <span class='simplePollRadioText'>{answer.title}</span>
+                                <label class='simplePollRadioText'>{answer.title}</label>
                             </li>
                         </div>
                     </f:for>
