@@ -1,0 +1,35 @@
+
+plugin.tx_simplepoll {
+    view {
+        # cat=plugin.tx_simplepoll/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:simplepoll/Resources/Private/Templates/
+        # cat=plugin.tx_simplepoll/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:simplepoll/Resources/Private/Partials/
+        # cat=plugin.tx_simplepoll/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:simplepoll/Resources/Private/Layouts/
+    }
+    persistence {
+        # cat=plugin.tx_simplepoll//a; type=string; label=Default storage PID
+        storagePid =
+    }
+    settings {
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Count Languages seperately
+        countLanguagesSeperately = 1
+        # cat=plugin.tx_simplepoll/settings; type=integer; label=Time in seconds before IP Locks are removed and a user can vote again if allowed
+        garbageCollectorInterval = 10
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Block multiple votes from one IP address
+        ipBlock = 0
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Block multiple votes from one computer via cookies
+        cookieBlock = 1
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Have the link button to the results without voting
+        showResultLink = 1
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Allow another vote after the garbageCollectorInterval has ended
+        allowMultipleVote = 1
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Show the results after voting
+        showResultAfterVote = 1
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Use Typoscript settings instead of plugin values (for bootstrapped use)
+        useTyposcriptSettings = 0
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Use the jQuery from this extension.
+        useInternalJquery = 1
+    }
+}

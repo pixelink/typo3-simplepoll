@@ -1,0 +1,48 @@
+<f:layout name="Default" />
+
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:v="http://fedext.net/ns/vhs/ViewHelpers"
+     xmlns:flux="http://fedext.net/ns/flux/ViewHelpers"
+     xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
+
+<f:section name="main">
+    <div class="simplePollWrap">
+        <div class="simplePollMain simplePoll-{simplePoll.uid}">
+            <f:if condition="{simplePoll.image}">
+                <div class="simplePollImage">
+                    <f:image src='{simplePoll.image.originalResource.publicUrl}' treatIdAsReference='0' />
+                </div>
+            </f:if>
+
+            <h3>{simplePoll.question}</h3>
+
+            <f:form action="vote" id="simplePollForm" name="simplePoll" controller="SimplePoll" method="post" arguments="{simplePoll: simplePoll}"
+                    data="{ajax-url: '{f:uri.action(action: \'vote\', controller: \'SimplePoll\', arguments: {simplePoll: simplePoll}, pageType: 1121)}'}">
+                <ul>
+                    <f:for each="{answers}" as="answer">
+                        <div class='simplePollRow'>
+                            <li>
+                                <f:form.radio value="{answer.uid}" id="simplePollRadio-{answer.uid}" name="simplePollRadio" class="simplePollRadioClass" />
+                                <label for="simplePollRadio-{answer.uid}" class="simplePollRadioText">{answer.title}</label>
+                            </li>
+                        </div>
+                    </f:for>
+                </ul>
+
+                <input id="simplePollVote" type="submit" value="{f:translate(id:'tx_simplepoll.voteButton')}" />
+
+                <f:if condition='{simplePoll.showResultLink}'>
+                    <f:link.action id="simplePollSeeVotes" action="seeVotes" controller="SimplePoll" arguments="{simplePoll: simplePoll}"
+                                   data="{ajax-url: '{f:uri.action(action: \'seeVotes\', controller: \'SimplePoll\', arguments: {simplePoll: simplePoll}, pageType: 1121)}'}">
+                        {f:translate(id:'tx_simplepoll.showResultsLink')}
+                    </f:link.action>
+                </f:if>
+            </f:form>
+
+            <div class='clearfix'></div>
+        </div>
+    </div>
+
+</f:section>
+
+</div>

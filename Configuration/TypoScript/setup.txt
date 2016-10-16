@@ -1,0 +1,76 @@
+
+plugin.tx_simplepoll {
+        templateRootPaths {
+            0 = EXT:simplepoll/Resources/Private/Templates/
+            1 = {$plugin.tx_simplepoll.view.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:simplepoll/Resources/Private/Partials/
+            1 = {$plugin.tx_simplepoll.view.partialRootPath}
+        }
+        layoutRootPaths {
+            0 = EXT:simplepoll/Resources/Private/Layouts/
+            1 = {$plugin.tx_simplepoll.view.layoutRootPath}
+        }
+    persistence {
+        storagePid = {$plugin.tx_simplepoll.persistence.storagePid}
+    }
+    features {
+        # uncomment the following line to enable the new Property Mapper.
+        # rewrittenPropertyMapper = 1
+    }
+    settings {
+        # Count Languages seperately
+        countLanguagesSeperately = {$plugin.tx_simplepoll.settings.countLanguagesSeperately}
+        # time in seconds before IP Locks are removed
+        garbageCollectorInterval = {$plugin.tx_simplepoll.settings.garbageCollectorInterval}
+        # block multiple votes from one IP address
+        ipBlock = {$plugin.tx_simplepoll.settings.ipBlock}
+        # block multiple votes from one computer via cookies
+        cookieBlock = {$plugin.tx_simplepoll.settings.cookieBlock}
+        # have the link button to the results without voting
+        showResultLink = {$plugin.tx_simplepoll.settings.showResultLink}
+        # allow another vote after the garbageCollectorInterval has ended
+        allowMultipleVote = {$plugin.tx_simplepoll.settings.allowMultipleVote}
+        # show the results after voting
+        showResultAfterVote = {$plugin.tx_simplepoll.settings.showResultAfterVote}
+        # Use Typoscript settings instead of plugin values (for bootstrapped use)
+        useTyposcriptSettings = {$plugin.tx_simplepoll.settings.useTyposcriptSettings}
+        # Use the jQuery from this extension.
+        useInternalJquery = {$plugin.tx_simplepoll.settings.useInternalJquery}
+    }
+}
+
+page = PAGE
+page {
+    includeCSS {
+        simplepoll = EXT:simplepoll/Resources/Public/Css/simplepoll.css
+    }
+    includeJSFooter {
+        simplepoll = EXT:simplepoll/Resources/Public/JavaScript/main.js
+    }
+}
+
+[globalVar = LIT:1 = {$plugin.tx_simplepoll.settings.useInternalJquery}]
+page {
+    includeJS {
+        jQuery = http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js
+        jQuery.external = 1 
+    }
+}
+[global]
+
+ajax = PAGE
+ajax {
+    typeNum = 1121
+    config {
+        disableAllHeaderCode = 1
+        xhtml_cleaning = 0
+        admPanel = 0
+        debug = 0
+        no_cache = 1
+#        additionalHeaders = Content-type:text/plain
+    }
+    10 < tt_content.list.20.simplepoll_polllisting
+}
+
