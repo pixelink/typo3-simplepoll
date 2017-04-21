@@ -10,6 +10,9 @@
     <div class="simplePollWrap">
         <div class="simplePollSeeVotes simplePoll-{simplePoll.uid}">
             <h3>{simplePoll.question}</h3>
+            <f:if condition="{hasVoted}">
+                <p>{hasVotedMessage}</p>
+            </f:if>
             <ul>
                 <f:for each="{answersArray}" as="answer">
                     <li>

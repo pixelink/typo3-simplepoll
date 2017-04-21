@@ -89,7 +89,22 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
                 $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
             }
         }
-        
+
+        // forward to results if user has already voted
+        // IP check always overrules cookie check
+        $checkVoteOkFromIp = $this->checkVoteOkFromIp($simplePoll);
+        if($checkVoteOkFromIp !== TRUE)
+        {
+            $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll, 'hasVoted' => TRUE));
+        }
+
+        // check if a vote is allowed by the users cookies
+        $checkVoteOkFromCookie = $this->checkVoteOkFromCookie($simplePoll);
+        if($checkVoteOkFromCookie !== TRUE)
+        {
+            $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll, 'hasVoted' => TRUE));
+        }
+
         // when using $answer = $simplePoll->getAnswers(), the sorting is always by UID
         $answers = $this->answerRepository->findBySimplepoll($simplePoll);
 
@@ -129,7 +144,6 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         // check if a vote is allowed by the users IP
         // IP check always overrules cookie check
         $checkVoteOkFromIp = $this->checkVoteOkFromIp($simplePoll);
-
         if($checkVoteOkFromIp !== TRUE)
         {
             $this->redirectWithPageType('message', NULL, NULL, array('message' => $checkVoteOkFromIp));
@@ -348,8 +362,9 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      * display the voting result
      *
      * @param \Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll
+     * @param   bool    $hasVoted   true if user has already voted
      */
-    public function seeVotesAction(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll)
+    public function seeVotesAction(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll, $hasVoted = FALSE)
     {
         $allAnswers = $this->answerRepository->findBySimplepoll($simplePoll);
         
@@ -376,6 +391,8 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         $this->view->assign('allAnswersCount', $answerCount);
         $this->view->assign('answersArray', $answersArray);
         $this->view->assign('simplePoll', $simplePoll);
+        $this->view->assign('hasVoted', $hasVoted);
+        $this->view->assign('hasVotedMessage', \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_simplepoll.alreadyVoted', 'Simplepoll'));
     }
 
     /**
@@ -427,43 +444,3 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         $this->redirect($action, $controller, $extension, $arguments);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

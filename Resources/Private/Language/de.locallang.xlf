@@ -7,6 +7,10 @@
                 <source>You are only allowed to vote once.</source>
                 <target state="translated">Sie dürfen nur einmal abstimmen.</target>
             </trans-unit>                    
+            <trans-unit id="tx_simplepoll.alreadyVoted">
+                <source>You have already voted.</source>
+                <target state="translated">Sie haben bereits abgestimmt.</target>
+            </trans-unit>
             <trans-unit id="tx_simplepoll.voteNotNow">
                 <source>You can not vote now. Please try again later.</source>
                 <target state="translated">Sie können im Moment nicht abstimmen. Bitte versuchen Sie es später noch einmal.</target>
