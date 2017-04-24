@@ -11,10 +11,7 @@ return array(
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'dividers2tabs' => TRUE,
-
-        'versioningWS' => 2,
-        'versioning_followPages' => TRUE,
-
+        'versioningWS' => true,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
@@ -25,13 +22,13 @@ return array(
             'endtime' => 'endtime',
         ),
         'searchFields' => 'question,image,end_time,show_result_link,show_result_after_vote,allow_multiple_vote,answers,ip_locks,',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('simplepoll') . 'Resources/Public/Icons/ext_icon.png'
+        'iconfile' => 'EXT:simplepoll/Resources/Public/Icons/ext_icon.png'
     ),
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, image, end_time, show_result_link, show_result_after_vote, allow_multiple_vote, answers, ip_locks',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, question, image, end_time, show_result_link, show_result_after_vote, allow_multiple_vote, answers, ip_locks, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, image, end_time, show_result_link, show_result_after_vote, allow_multiple_vote, answers, ip_locks, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -90,34 +87,38 @@ return array(
 		),
 		'starttime' => array(
 			'exclude' => 1,
-			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
 			'config' => array(
 				'type' => 'input',
+                'renderType' => 'inputDateTime',
 				'size' => 13,
-				'max' => 20,
 				'eval' => 'datetime',
 				'checkbox' => 0,
 				'default' => 0,
 				'range' => array(
 					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
 				),
+                'behaviour' => array (
+                    'allowLanguageSynchronization' => true,
+                ),
 			),
 		),
 		'endtime' => array(
 			'exclude' => 1,
-			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
 			'config' => array(
 				'type' => 'input',
-				'size' => 13,
-				'max' => 20,
+                'renderType' => 'inputDateTime',
+                'size' => 13,
 				'eval' => 'datetime',
 				'checkbox' => 0,
 				'default' => 0,
 				'range' => array(
 					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
 				),
+                'behaviour' => array (
+                    'allowLanguageSynchronization' => true,
+                ),
 			),
 		),
 
@@ -144,7 +145,8 @@ return array(
 			'label' => 'LLL:EXT:simplepoll/Resources/Private/Language/locallang_db.xlf:tx_simplepoll_domain_model_simplepoll.end_time',
 			'config' => array(
 				'type' => 'input',
-				'size' => 10,
+                'renderType' => 'inputDateTime',
+				'size' => 13,
 				'eval' => 'datetime',
 				'checkbox' => 1
 			),

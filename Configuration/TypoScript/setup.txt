@@ -1,5 +1,6 @@
 
 plugin.tx_simplepoll {
+    view {
         templateRootPaths {
             0 = EXT:simplepoll/Resources/Private/Templates/
             1 = {$plugin.tx_simplepoll.view.templateRootPath}
@@ -12,6 +13,7 @@ plugin.tx_simplepoll {
             0 = EXT:simplepoll/Resources/Private/Layouts/
             1 = {$plugin.tx_simplepoll.view.layoutRootPath}
         }
+    }
     persistence {
         storagePid = {$plugin.tx_simplepoll.persistence.storagePid}
     }
