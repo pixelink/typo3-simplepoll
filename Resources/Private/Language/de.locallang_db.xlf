@@ -3,6 +3,10 @@
     <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-08-01T13:33:08Z" product-name="simplepoll">
         <header/>
         <body>
+            <trans-unit id="tx_simplepoll_domain_model_simplepoll.access">
+                <source>Access</source>
+                <target state="translated">Zugriff</target>
+            </trans-unit>
             <trans-unit id="tx_simplepoll_domain_model_simplepoll">
                 <source>Simple Poll</source>
                 <target state="translated">Simple Poll</target>
