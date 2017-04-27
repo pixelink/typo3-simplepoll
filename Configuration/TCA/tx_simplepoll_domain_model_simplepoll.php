@@ -28,7 +28,7 @@ return array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, image, end_time, show_result_link, show_result_after_vote, allow_multiple_vote, answers, ip_locks',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, image, end_time, show_result_link, show_result_after_vote, allow_multiple_vote, answers, ip_locks, --div--;LLL:EXT:simplepoll/Resources/Private/Language/locallang_db.xlf:tx_simplepoll_domain_model_simplepoll.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, image, end_time, show_result_link, show_result_after_vote, allow_multiple_vote, answers, ip_locks, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -87,6 +87,7 @@ return array(
 		),
 		'starttime' => array(
 			'exclude' => 1,
+            'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
 			'config' => array(
 				'type' => 'input',
@@ -97,13 +98,11 @@ return array(
 				'range' => array(
 					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
 				),
-                'behaviour' => array (
-                    'allowLanguageSynchronization' => true,
-                ),
 			),
 		),
 		'endtime' => array(
 			'exclude' => 1,
+            'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
 			'config' => array(
 				'type' => 'input',
@@ -114,9 +113,6 @@ return array(
 				'range' => array(
 					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
 				),
-                'behaviour' => array (
-                    'allowLanguageSynchronization' => true,
-                ),
 			),
 		),
 
