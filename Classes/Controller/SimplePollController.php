@@ -89,7 +89,24 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
                 $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
             }
         }
-        
+
+        $showResultIfVoted = $this->settings['showResultIfVoted'];
+        if(strtolower($showResultIfVoted) == 'true' || $showResultIfVoted == '1')
+        {
+            // check if a vote is allowed by the users IP
+            // IP check always overrules cookie check
+            $checkVoteOkFromIp = $this->checkVoteOkFromIp($simplePoll, TRUE);
+            if ($checkVoteOkFromIp !== TRUE) {
+                $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
+            }
+
+            // check if a vote is allowed by the users cookies
+            $checkVoteOkFromCookie = $this->checkVoteOkFromCookie($simplePoll, TRUE);
+            if ($checkVoteOkFromCookie !== TRUE) {
+                $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
+            }
+        }
+
         // when using $answer = $simplePoll->getAnswers(), the sorting is always by UID
         $answers = $this->answerRepository->findBySimplepoll($simplePoll);
 
