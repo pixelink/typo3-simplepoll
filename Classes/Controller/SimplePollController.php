@@ -89,7 +89,24 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
                 $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
             }
         }
-        
+
+        $showResultIfVoted = $this->settings['showResultIfVoted'];
+        if(strtolower($showResultIfVoted) == 'true' || $showResultIfVoted == '1')
+        {
+            // check if a vote is allowed by the users IP
+            // IP check always overrules cookie check
+            $checkVoteOkFromIp = $this->checkVoteOkFromIp($simplePoll, TRUE);
+            if ($checkVoteOkFromIp !== TRUE) {
+                $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
+            }
+
+            // check if a vote is allowed by the users cookies
+            $checkVoteOkFromCookie = $this->checkVoteOkFromCookie($simplePoll, TRUE);
+            if ($checkVoteOkFromCookie !== TRUE) {
+                $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
+            }
+        }
+
         // when using $answer = $simplePoll->getAnswers(), the sorting is always by UID
         $answers = $this->answerRepository->findBySimplepoll($simplePoll);
 
@@ -182,9 +199,10 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      * user can vote again. if he votes and cookies are used, a cookie with the current timstamp is written
      *
      * @param \Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll
+     * @param boolean $onlyCheck
      * @return mixed TRUE if the user is allowed to vote, string with the error message if not
      */
-    protected function checkVoteOkFromCookie(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll)
+    protected function checkVoteOkFromCookie(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll, $onlyCheck = false)
     {
         // get the settings for cookie blocking
         $cookieBlock = $this->settings['cookieBlock'];
@@ -218,16 +236,15 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
                 return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_simplepoll.voteOnlyOnce', 'Simplepoll');
             }
         }
-
-        // set the cookie for the current poll, so other polls won't be affected.
-        // if multiple votes are not allowed we set the cookie valid for one month
-        if($allowMultipleVote)
+        if(!$onlyCheck)
         {
-            setcookie('simplePoll-' . $simplePoll->getUid(), time(), time() + $this->settings['garbageCollectorInterval']);
-        }
-        else
-        {
-            setcookie('simplePoll-' . $simplePoll->getUid(), time(), time() + 60*60*24*30);
+            // set the cookie for the current poll, so other polls won't be affected.
+            // if multiple votes are not allowed we set the cookie valid for one month
+            if ($allowMultipleVote) {
+                setcookie('simplePoll-' . $simplePoll->getUid(), time(), time() + $this->settings[ 'garbageCollectorInterval' ]);
+            } else {
+                setcookie('simplePoll-' . $simplePoll->getUid(), time(), time() + 60 * 60 * 24 * 30);
+            }
         }
 
         return TRUE ;
@@ -242,9 +259,10 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      * and calls the garbage collector if the ipBlock is activated via typoscript.
      *
      * @param \Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll
+     * @param boolean $onlyCheck
      * @return mixed TRUE if the user is allowed to vote, string with the error message if not
      */
-    protected function checkVoteOkFromIp(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll)
+    protected function checkVoteOkFromIp(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll, $onlyCheck = false)
     {
         $ipBlock = $this->settings['ipBlock'];
         if(! (strtolower($ipBlock) == 'true' || $ipBlock == '1'))
@@ -293,14 +311,15 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
                 return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_simplepoll.voteOnlyOnce', 'Simplepoll');
             }
         }
-
-        // first or allowed vote from this IP, so add the user to the ip lock list. return true because he is allowed to vote
-        $ipLock = $this->objectManager->get('Pixelink\Simplepoll\Domain\Model\IpLock');
-        $ipLock->setAddress($userIp);
-        $ipLock->setTimestamp(new \DateTime);
-        $simplePoll->addIpLock($ipLock);
-        $this->simplePollRepository->update($simplePoll);
-
+        if (!$onlyCheck)
+        {
+            // first or allowed vote from this IP, so add the user to the ip lock list. return true because he is allowed to vote
+            $ipLock = $this->objectManager->get('Pixelink\Simplepoll\Domain\Model\IpLock');
+            $ipLock->setAddress($userIp);
+            $ipLock->setTimestamp(new \DateTime);
+            $simplePoll->addIpLock($ipLock);
+            $this->simplePollRepository->update($simplePoll);
+        }
         return TRUE;
     }
 

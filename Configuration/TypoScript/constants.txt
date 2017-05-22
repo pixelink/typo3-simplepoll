@@ -27,6 +27,8 @@ plugin.tx_simplepoll {
         allowMultipleVote = 1
         # cat=plugin.tx_simplepoll/settings; type=boolean; label=Show the results after voting
         showResultAfterVote = 1
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Show only the results if already voted
+        showResultIfVoted = 1
         # cat=plugin.tx_simplepoll/settings; type=boolean; label=Use Typoscript settings instead of plugin values (for bootstrapped use)
         useTyposcriptSettings = 0
         # cat=plugin.tx_simplepoll/settings; type=boolean; label=Use the jQuery from this extension.
