@@ -59,6 +59,9 @@ Default storage PID - ``[plugin.tx_simplepoll.persistence.storagePid]``
 Show the results after voting - ``[plugin.tx_simplepoll.settings.showResultAfterVote]``
 	Show the results after voting
 |
+Show the results if not allowed to vote - ``[plugin.tx_simplepoll.settings.showResultIfNotAllowedToVote]``
+	If the User already voted and currently is not allowed to vote again he is forwarded to the results. This is overridden by 'showResultAfterVote'. Default is false, so we keep consistency with old versions.
+|
 Have the link button to the results without voting - ``[plugin.tx_simplepoll.settings.showResultLink]``
 	Have the link button to the results without voting
 |

@@ -26,6 +26,7 @@ namespace Pixelink\Simplepoll\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * SimplePollController
@@ -90,20 +91,30 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
             }
         }
 
-        $showResultIfVoted = $this->settings['showResultIfVoted'];
-        if(strtolower($showResultIfVoted) == 'true' || $showResultIfVoted == '1')
-        {
-            // check if a vote is allowed by the users IP
-            // IP check always overrules cookie check
-            $checkVoteOkFromIp = $this->checkVoteOkFromIp($simplePoll, TRUE);
-            if ($checkVoteOkFromIp !== TRUE) {
-                $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
-            }
+        // if a user already voted and currently is not allowed to do so again, we forward him directly to the result
+        // this can only happen, if showResultAfterVote is set to true, otherwise we have to stick to the old behaviour and display the question.
+        // get the settings for show results after vote either global or local
+        if($this->settings['useTyposcriptSettings'] == 'true' || $this->settings['useTyposcriptSettings'] == '1') {
+            $showResultAfterVote = $this->settings['showResultAfterVote'];
+        } else {
+            $showResultAfterVote = $simplePoll->getShowResultAfterVote();
+        }
 
-            // check if a vote is allowed by the users cookies
-            $checkVoteOkFromCookie = $this->checkVoteOkFromCookie($simplePoll, TRUE);
-            if ($checkVoteOkFromCookie !== TRUE) {
-                $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
+        if(strtolower($showResultAfterVote) == 'true' || $showResultAfterVote == '1') {
+            $showResultIfNotAllowedToVote = $this->settings['showResultIfNotAllowedToVote'];
+            if (strtolower($showResultIfNotAllowedToVote) == 'true' || $showResultIfNotAllowedToVote == '1') {
+                // check if a vote is allowed by the users IP
+                // IP check always overrules cookie check
+                $checkVoteOkFromIp = $this->checkVoteOkFromIp($simplePoll, TRUE);
+                if ($checkVoteOkFromIp !== TRUE) {
+                    $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
+                }
+
+                // check if a vote is allowed by the users cookies
+                $checkVoteOkFromCookie = $this->checkVoteOkFromCookie($simplePoll, TRUE);
+                if ($checkVoteOkFromCookie !== TRUE) {
+                    $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
+                }
             }
         }
 
@@ -182,7 +193,6 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         if($showResultAfterVote)
         {
             $this->redirectWithPageType('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
-
         }
         else
         {

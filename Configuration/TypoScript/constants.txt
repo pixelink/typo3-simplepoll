@@ -21,15 +21,15 @@ plugin.tx_simplepoll {
         ipBlock = 0
         # cat=plugin.tx_simplepoll/settings; type=boolean; label=Block multiple votes from one computer via cookies
         cookieBlock = 1
-        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Have the link button to the results without voting
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Have the link button to the results without voting (by default set in poll itself)
         showResultLink = 1
-        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Allow another vote after the garbageCollectorInterval has ended
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Allow another vote after the garbageCollectorInterval has ended (by default set in poll itself)
         allowMultipleVote = 1
-        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Show the results after voting
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Show the results after voting (by default set in poll itself)
         showResultAfterVote = 1
-        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Show only the results if already voted
-        showResultIfVoted = 1
-        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Use Typoscript settings instead of plugin values (for bootstrapped use)
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Forward to displaying the result if currently not allowed to vote. Can be Overridden by showResultAfterVote.
+        showResultIfNotAllowedToVote = 0
+        # cat=plugin.tx_simplepoll/settings; type=boolean; label=Use Typoscript settings instead of values in the poll itself (for bootstrapped use)
         useTyposcriptSettings = 0
         # cat=plugin.tx_simplepoll/settings; type=boolean; label=Use the jQuery from this extension.
         useInternalJquery = 1

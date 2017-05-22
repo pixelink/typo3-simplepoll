@@ -37,7 +37,7 @@ plugin.tx_simplepoll {
         # show the results after voting
         showResultAfterVote = {$plugin.tx_simplepoll.settings.showResultAfterVote}
         # show only the results if already voted
-        showResultIfVoted = {$plugin.tx_simplepoll.settings.showResultIfVoted}
+        showResultIfNotAllowedToVote = {$plugin.tx_simplepoll.settings.showResultIfNotAllowedToVote}
         # Use Typoscript settings instead of plugin values (for bootstrapped use)
         useTyposcriptSettings = {$plugin.tx_simplepoll.settings.useTyposcriptSettings}
         # Use the jQuery from this extension.
