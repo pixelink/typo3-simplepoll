@@ -141,7 +141,7 @@ return array(
 				'type' => 'input',
 				'size' => 13,
 				'eval' => 'datetime',
-				'checkbox' => 1
+				'default' => 0
 			),
 		),
 		'show_result_link' => array(
