@@ -26,6 +26,10 @@ namespace Pixelink\Simplepoll\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Pixelink\Simplepoll\Domain\Repository\AnswerRepository;
+use Pixelink\Simplepoll\Domain\Repository\IpLockRepository;
+use Pixelink\Simplepoll\Domain\Repository\SimplePollRepository;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
@@ -34,35 +38,42 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
     /**
-     * simplePollRepository
-     *
      * @var \Pixelink\Simplepoll\Domain\Repository\SimplePollRepository
-     * @inject
      */
     protected $simplePollRepository = NULL;
     /**
-     * answerPollRepository
-     *
      * @var \Pixelink\Simplepoll\Domain\Repository\AnswerRepository
-     * @inject
      */
     protected $answerRepository = NULL;
     /**
-     * ipLockRepository
-     *
      * @var \Pixelink\Simplepoll\Domain\Repository\IpLockRepository
-     * @inject
      */
     protected $ipLockRepository = NULL;
-    
     /**
-    * Persistence Manager
-    *
     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-    * @inject
-    */    
+    */
     protected $persistenceManager;
-    
+
+    /**
+     * injections
+     */
+    public function injectSimplePollRepository(SimplePollRepository $simplePollRepository)
+    {
+        $this->simplePollRepository = $simplePollRepository;
+    }
+    public function injectAnswerRepository(AnswerRepository $answerRepository)
+    {
+        $this->answerRepository = $answerRepository;
+    }
+    public function injectIpLockRepository(IpLockRepository $ipLockRepository)
+    {
+        $this->ipLockRepository = $ipLockRepository;
+    }
+    public function injectPersistenceManager(PersistenceManager $persistenceManager)
+    {
+        $this->persistenceManager = $persistenceManager;
+    }
+
     /**
      * list action
      * 
@@ -385,7 +396,7 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         // if all languages are meant to be added up, we get the needed counters here
         if(! $this->settings['countLanguagesSeperately']) 
         {
-            $allAnswers = $this->answerRepository->findAllLanguageAnswers($simplePoll, $allAnswers);
+            $allAnswers = $this->answerRepository->findAllLanguageAnswers($allAnswers);
         }
         
         $answerCount = 0;

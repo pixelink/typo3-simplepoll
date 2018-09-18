@@ -41,7 +41,7 @@ class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $title = '';
 
 	/**
-	 * The count of how many times thisanswer was chosen
+	 * The count of how many times this answer was chosen
 	 *
 	 * @var integer
 	 */
