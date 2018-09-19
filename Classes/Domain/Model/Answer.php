@@ -32,6 +32,13 @@ namespace Pixelink\Simplepoll\Domain\Model;
  */
 class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
+    /**
+     * get the systems sorting of the answers to be able to have backend sorting in the frontend
+     *
+     * @var int
+     */
+    protected $sorting = 0;
+
 	/**
 	 * The text of the answer
 	 *
@@ -46,6 +53,16 @@ class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var integer
 	 */
 	protected $counter = 0;
+
+    /**
+     * get systems sorting value of the answer
+     *
+     * @return int
+     */
+    public function getSorting()
+    {
+        return $this->sorting;
+    }
 
 	/**
 	 * Returns the title

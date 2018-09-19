@@ -130,7 +130,7 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         }
 
         // when using $answer = $simplePoll->getAnswers(), the sorting is always by UID
-        $answers = $this->answerRepository->findBySimplepoll($simplePoll);
+        $answers = $simplePoll->getSortedAnswers();
 
         $this->view->assign('simplePoll', $simplePoll);
         $this->view->assign('answers', $answers);

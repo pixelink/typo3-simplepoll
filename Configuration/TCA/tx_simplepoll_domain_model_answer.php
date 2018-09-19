@@ -147,7 +147,15 @@ return [
 				'eval' => 'int'
 			],
 		],
-
+		'sorting' => [
+			'exclude' => 1,
+			'label' => 'LLL:EXT:simplepoll/Resources/Private/Language/locallang_db.xlf:tx_simplepoll_domain_model_answer.counter',
+			'config' => [
+				'type' => 'input',
+				'size' => 4,
+				'eval' => 'int'
+			],
+		],
 		'simplepoll' => [
 			'config' => [
 				'type' => 'passthrough',

@@ -148,6 +148,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'eval' => 'datetime',
+                'default' => strtotime('+1 month')
             ],
 		],
 		'show_result_link' => [
