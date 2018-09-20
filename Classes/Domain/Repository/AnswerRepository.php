@@ -26,6 +26,11 @@ namespace Pixelink\Simplepoll\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * The repository for SimplePolls
@@ -36,18 +41,23 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
      * @var array
      */
      protected $defaultOrderings = array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
-     
-     /**
-      * find all language answers
-      * 
-      * for a given array of answers and a simplepoll we check all languages for answers and
-      * sum them up. 
-      * later the an array like $allAnswers with the corrected count is returned
-      * 
-      * @param \Pixelink\Simplepoll\Domain\Model\SimplePoll $simplepollUid
-      * @param \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $allAnswers
-      */
-     public function findAllLanguageAnswers(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplepoll, \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $allAnswers)
+
+    /**
+     * @var string
+     */
+    protected $answerTable = 'tx_simplepoll_domain_model_answer';
+
+    /**
+     * find all language answers
+     *
+     * for a given array of answers and a simplepoll we check all languages for answers and
+     * sum them up.
+     * later an array like $allAnswers with the corrected count is returned
+     *
+     * @param array $allAnswers
+     * @return array
+     */
+     public function findAllLanguageAnswers(array $allAnswers)
      {
          $returnedAnswers = array();
          foreach($allAnswers as $answer)
@@ -58,7 +68,6 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
              $answer->setCounter($counterDefaultLanguage + $counterOtherLanguages);
              $returnedAnswers[] = $answer;
          }
-         
          return $returnedAnswers;
      }
      
@@ -73,17 +82,25 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
       * @param int $uid
       * @return int
       */
-     public function getCounterForUidDefaultLanguage($uid)
-     {
-        $answer = $GLOBALS['TYPO3_DB']->exec_SELECTquery('counter', 'tx_simplepoll_domain_model_answer', 'uid=' . $uid . ' and deleted=0 and hidden=0', '', '');
-        if($answer->num_rows > 0)
-        {
-            $result = $GLOBALS['TYPO3_DB']->sql_fetch_row($answer);
-            
-            return (int)$result[0];
+    public function getCounterForUidDefaultLanguage($uid)
+    {
+        /** @var QueryBuilder $queryBuilder */
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($this->answerTable);
+        $answer = $queryBuilder
+            ->select('counter')
+            ->from($this->answerTable)
+            ->where(
+                $queryBuilder->expr()->eq('uid', $uid),
+                $queryBuilder->expr()->eq('deleted', 0),
+                $queryBuilder->expr()->eq('hidden', 0)
+            )
+            ->execute();
+
+        if ($row = $answer->fetch()) {
+            return $row['counter'];
         }
         return 0;
-     }
+    }
 
      /**
       * get counter for uid other language
@@ -95,17 +112,28 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
       * 
       * @param int $uid
       * @return int
-      */     public function getCounterForUidOtherLanguages($uid)
-     {
-        $answer = $GLOBALS['TYPO3_DB']->exec_SELECTquery('sum(counter)', 'tx_simplepoll_domain_model_answer', 'l10n_parent=' . $uid . ' and deleted=0 and hidden=0', '', '');
-        if($answer->num_rows > 0)
-        {
-            $result = $GLOBALS['TYPO3_DB']->sql_fetch_row($answer);
-            
-            return (int)$result[0];
+      */
+    public function getCounterForUidOtherLanguages($uid)
+    {
+        /** @var QueryBuilder $queryBuilder */
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($this->answerTable);
+        $answer = $queryBuilder
+            ->select('counter')
+            ->from($this->answerTable)
+            ->where(
+                $queryBuilder->expr()->eq('l10n_parent', $uid),
+                $queryBuilder->expr()->eq('deleted', 0),
+                $queryBuilder->expr()->eq('hidden', 0)
+            )
+            ->execute();
+
+        // add up answers with other languages
+        $languagesSum = 0;
+        while ($row = $answer->fetch()) {
+            $languagesSum += $row['counter'];
         }
-        return 0;
-     }
+        return $languagesSum;
+    }
 
 
              

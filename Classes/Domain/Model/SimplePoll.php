@@ -26,6 +26,7 @@ namespace Pixelink\Simplepoll\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * SimplePoll
@@ -281,7 +282,28 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Pixelink\Simplepoll\Domain\Model\Answer> $answers
 	 */
 	public function getAnswers() {
-            return $this->answers;
+        return $this->answers;
+	}
+
+    /**
+     * Returns the answers sorted by the "sorting" field in the database as an array
+     *
+     * @return array
+     */
+	public function getSortedAnswers() {
+        $answers = $this->answers;
+
+        foreach ($answers as $answer) {
+            $answersArray[] = $answer;
+        }
+
+        foreach ($answersArray as $key => $row)
+        {
+            $answersSorting[$key] = $row->getSorting();
+        }
+        array_multisort($answersSorting, SORT_ASC, $answersArray);
+
+        return $answersArray;
 	}
 
 	/**
