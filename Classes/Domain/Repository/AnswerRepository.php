@@ -54,10 +54,10 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
      * sum them up.
      * later an array like $allAnswers with the corrected count is returned
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $allAnswers
+     * @param array $allAnswers
      * @return array
      */
-     public function findAllLanguageAnswers(QueryResult $allAnswers)
+     public function findAllLanguageAnswers(array $allAnswers)
      {
          $returnedAnswers = array();
          foreach($allAnswers as $answer)

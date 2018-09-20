@@ -83,6 +83,7 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      */
     public function listAction() {
         //this selects the poll given in the plugin itself
+        //this selects the poll given in the plugin itself
         $simplePoll = $this->simplePollRepository->findByUid($this->settings['simplepoll']['uid']);
         if(! $simplePoll)
         {
@@ -360,21 +361,18 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         $currentTime = new \DateTime;
 
         // get all ip locks, which belong to the poll
-        $ipLocks = $this->ipLockRepository->findBySimplepoll($simplePoll);
+        $ipLocks = $simplePoll->getIpLocks();
         foreach($ipLocks as $ipLock)
         {
             $ipLockTime = $ipLock->getTimestamp();
-            if($ipLockTime !== NULL)
+            if($ipLockTime !== null)
             {
                 $timeDelta = (int)$currentTime->format('U') - (int)$ipLockTime->format('U');
 
-                // if the iplock is older than the given setting value, we remove its timestamp so the user can vote again
-                // but his ip is still saved.
+                // if the iplock is older than the given setting value, we remove it
                 if($timeDelta > $garbageCollectorInterval)
                 {
                     $simplePoll->removeIpLock($ipLock);
-                    $ipLock->setTimestamp();
-                    $simplePoll->addIpLock($ipLock);
                 }
             }
         }
@@ -391,7 +389,7 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      */
     public function seeVotesAction(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll)
     {
-        $allAnswers = $this->answerRepository->findBySimplepoll($simplePoll);
+        $allAnswers = $simplePoll->getSortedAnswers();
         
         // if all languages are meant to be added up, we get the needed counters here
         if(! $this->settings['countLanguagesSeperately']) 
