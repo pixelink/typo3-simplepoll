@@ -29,18 +29,17 @@ namespace Pixelink\Simplepoll\Domain\Repository;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * The repository for SimplePolls
  */
-class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
 
     /**
      * @var array
      */
-     protected $defaultOrderings = array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
+    protected $defaultOrderings = array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
 
     /**
      * @var string
@@ -54,34 +53,33 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
      * sum them up.
      * later an array like $allAnswers with the corrected count is returned
      *
-     * @param array $allAnswers
+     * @param type $allAnswers
      * @return array
      */
-     public function findAllLanguageAnswers(array $allAnswers)
-     {
-         $returnedAnswers = array();
-         foreach($allAnswers as $answer)
-         {
-             $counterDefaultLanguage = $this->getCounterForUidDefaultLanguage($answer->getUid());
-             $counterOtherLanguages = $this->getCounterForUidOtherLanguages($answer->getUid());
-             
-             $answer->setCounter($counterDefaultLanguage + $counterOtherLanguages);
-             $returnedAnswers[] = $answer;
-         }
-         return $returnedAnswers;
-     }
-     
-     /**
-      * get counter for uid default language
-      * 
-      * for any given answer we get the true counter for the default language entry
-      * note:
-      * for any language typo3 returns the uid of the answer with the default language. 
-      * language handling is buggy and about to be changed in version 9 or 10
-      * 
-      * @param int $uid
-      * @return int
-      */
+    public function findAllLanguageAnswers($allAnswers)
+    {
+        $returnedAnswers = array();
+        foreach ($allAnswers as $answer) {
+            $counterDefaultLanguage = $this->getCounterForUidDefaultLanguage($answer->getUid());
+            $counterOtherLanguages = $this->getCounterForUidOtherLanguages($answer->getUid());
+
+            $answer->setCounter($counterDefaultLanguage + $counterOtherLanguages);
+            $returnedAnswers[] = $answer;
+        }
+        return $returnedAnswers;
+    }
+
+    /**
+     * get counter for uid default language
+     *
+     * for any given answer we get the true counter for the default language entry
+     * note:
+     * for any language typo3 returns the uid of the answer with the default language.
+     * language handling is buggy and about to be changed in version 9 or 10
+     *
+     * @param int $uid
+     * @return int
+     */
     public function getCounterForUidDefaultLanguage($uid)
     {
         /** @var QueryBuilder $queryBuilder */
@@ -102,17 +100,17 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
         return 0;
     }
 
-     /**
-      * get counter for uid other language
-      * 
-      * for any given answer we get the true counter all other languages combined.
-      * note:
-      * for any language typo3 returns the uid of the answer with the default language. 
-      * language handling is buggy and about to be changed in version 9 or 10
-      * 
-      * @param int $uid
-      * @return int
-      */
+    /**
+     * get counter for uid other language
+     *
+     * for any given answer we get the true counter all other languages combined.
+     * note:
+     * for any language typo3 returns the uid of the answer with the default language.
+     * language handling is buggy and about to be changed in version 9 or 10
+     *
+     * @param int $uid
+     * @return int
+     */
     public function getCounterForUidOtherLanguages($uid)
     {
         /** @var QueryBuilder $queryBuilder */
@@ -136,6 +134,4 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
     }
 
 
-             
-	
 }

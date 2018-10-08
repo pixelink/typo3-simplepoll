@@ -24,7 +24,7 @@ import os
 from sphinx.highlighting import lexers
 if lexers:
 	from pygments.lexers.web import PhpLexer
-	lexers['php'] = PhpLexer(startinline=True)
+	lexers['php'] = PhpLexer(startinline=true)
 
 # -- General configuration -----------------------------------------------------
 
@@ -81,15 +81,15 @@ exclude_trees = ['_make']
 #default_role = None
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
-#add_function_parentheses = True
+#add_function_parentheses = true
 
 # If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
-#add_module_names = True
+#add_module_names = true
 
 # If true, sectionauthor and moduleauthor directives will be shown in the
 # output. They are ignored by default.
-#show_authors = False
+#show_authors = false
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -98,7 +98,7 @@ pygments_style = 'sphinx'
 #modindex_common_prefix = []
 
 # If true, keep warnings as "system message" paragraphs in the built documents.
-#keep_warnings = False
+#keep_warnings = false
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -147,7 +147,7 @@ html_static_path = ['../_static']
 
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
-#html_use_smartypants = True
+#html_use_smartypants = true
 
 # Custom sidebar templates, maps document names to template names.
 #html_sidebars = {}
@@ -157,22 +157,22 @@ html_static_path = ['../_static']
 #html_additional_pages = {}
 
 # If false, no module index is generated.
-#html_domain_indices = True
+#html_domain_indices = true
 
 # If false, no index is generated.
-#html_use_index = True
+#html_use_index = true
 
 # If true, the index is split into individual pages for each letter.
-#html_split_index = False
+#html_split_index = false
 
 # If true, links to the reST sources are added to the pages.
-#html_show_sourcelink = True
+#html_show_sourcelink = true
 
-# If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
-#html_show_sphinx = True
+# If true, "Created using Sphinx" is shown in the HTML footer. Default is true.
+#html_show_sphinx = true
 
-# If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
-#html_show_copyright = True
+# If true, "(C) Copyright ..." is shown in the HTML footer. Default is true.
+#html_show_copyright = true
 
 # If true, an OpenSearch description file will be output, and all pages will
 # contain a <link> tag referring to it.  The value of this option must be the
@@ -213,19 +213,19 @@ latex_documents = [
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
-#latex_use_parts = False
+#latex_use_parts = false
 
 # If true, show page references after internal links.
-#latex_show_pagerefs = False
+#latex_show_pagerefs = false
 
 # If true, show URL addresses after external links.
-#latex_show_urls = False
+#latex_show_urls = false
 
 # Documents to append as an appendix to all manuals.
 #latex_appendices = []
 
 # If false, no module index is generated.
-#latex_domain_indices = True
+#latex_domain_indices = true
 
 
 # -- Options for rst2pdf output ------------------------------------------------
@@ -240,7 +240,7 @@ latex_documents = [
 # this config per-document.
 # For example,
 # ('index', u'MyProject', u'My Project', u'Author Name',
-#  dict(pdf_compressed = True))
+#  dict(pdf_compressed = true))
 # would mean that specific document would be compressed
 # regardless of the global pdf_compressed setting.
 pdf_documents = [
@@ -255,9 +255,9 @@ pdf_stylesheets = ['sphinx','kerning','a4']
 pdf_style_path = ['.', '_styles']
 
 # Create a compressed PDF
-# Use True/False or 1/0
-# Example: compressed=True
-#pdf_compressed = False
+# Use true/false or 1/0
+# Example: compressed=true
+#pdf_compressed = false
 
 # A colon-separated list of folders to search for fonts. Example:
 # pdf_font_path = ['/usr/share/fonts', '/usr/share/texmf-dist/fonts/']
@@ -280,19 +280,19 @@ pdf_style_path = ['.', '_styles']
 
 # Insert footnotes where they are defined instead of
 # at the end.
-#pdf_inline_footnotes = True
+#pdf_inline_footnotes = true
 
 # verbosity level. 0 1 or 2
 #pdf_verbosity = 0
 
 # If false, no index is generated.
-#pdf_use_index = True
+#pdf_use_index = true
 
 # If false, no modindex is generated.
-#pdf_use_modindex = True
+#pdf_use_modindex = true
 
 # If false, no coverpage is generated.
-#pdf_use_coverpage = True
+#pdf_use_coverpage = true
 
 # Name of the cover page template to use
 #pdf_cover_template = 'sphinxcover.tmpl'
@@ -302,7 +302,7 @@ pdf_style_path = ['.', '_styles']
 
 # Enable experimental feature to split table cells. Use it
 # if you get "DelayedTable too big" errors
-#pdf_splittables = False
+#pdf_splittables = false
 
 # Set the default DPI for images
 #pdf_default_dpi = 72
@@ -315,13 +315,13 @@ pdf_style_path = ['.', '_styles']
 #pdf_page_template = 'cutePage'
 
 # Show Table Of Contents at the beginning?
-#pdf_use_toc = True
+#pdf_use_toc = true
 
 # How many levels deep should the table of contents be?
 pdf_toc_depth = 9999
 
 # Add section number to section references
-pdf_use_numbered_links = False
+pdf_use_numbered_links = false
 
 # Background images fitting mode
 pdf_fit_background_mode = 'scale'
@@ -337,7 +337,7 @@ man_pages = [
 ]
 
 # If true, show URL addresses after external links.
-#man_show_urls = False
+#man_show_urls = false
 
 
 # -- Options for Texinfo output -------------------------------------------
@@ -355,13 +355,13 @@ texinfo_documents = [
 #texinfo_appendices = []
 
 # If false, no module index is generated.
-#texinfo_domain_indices = True
+#texinfo_domain_indices = true
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
-#texinfo_no_detailmenu = False
+#texinfo_no_detailmenu = false
 
 
 #=================================================

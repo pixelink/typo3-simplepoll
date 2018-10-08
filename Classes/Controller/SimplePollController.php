@@ -30,28 +30,28 @@ use Pixelink\Simplepoll\Domain\Repository\AnswerRepository;
 use Pixelink\Simplepoll\Domain\Repository\IpLockRepository;
 use Pixelink\Simplepoll\Domain\Repository\SimplePollRepository;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * SimplePollController
  */
-class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
 
     /**
      * @var \Pixelink\Simplepoll\Domain\Repository\SimplePollRepository
      */
-    protected $simplePollRepository = NULL;
+    protected $simplePollRepository = null;
     /**
      * @var \Pixelink\Simplepoll\Domain\Repository\AnswerRepository
      */
-    protected $answerRepository = NULL;
+    protected $answerRepository = null;
     /**
      * @var \Pixelink\Simplepoll\Domain\Repository\IpLockRepository
      */
-    protected $ipLockRepository = NULL;
+    protected $ipLockRepository = null;
     /**
-    * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-    */
+     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+     */
     protected $persistenceManager;
 
     /**
@@ -61,14 +61,17 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
     {
         $this->simplePollRepository = $simplePollRepository;
     }
+
     public function injectAnswerRepository(AnswerRepository $answerRepository)
     {
         $this->answerRepository = $answerRepository;
     }
+
     public function injectIpLockRepository(IpLockRepository $ipLockRepository)
     {
         $this->ipLockRepository = $ipLockRepository;
     }
+
     public function injectPersistenceManager(PersistenceManager $persistenceManager)
     {
         $this->persistenceManager = $persistenceManager;
@@ -76,70 +79,66 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 
     /**
      * list action
-     * 
+     *
      * display the poll
      *
      * @return void
      */
-    public function listAction() {
-        //this selects the poll given in the plugin itself
+    public function listAction()
+    {
         //this selects the poll given in the plugin itself
         $simplePoll = $this->simplePollRepository->findByUid($this->settings['simplepoll']['uid']);
-        if(! $simplePoll)
-        {
+        if (!$simplePoll) {
             $message = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_simplepoll.pollNotFound', 'Simplepoll');
-            $this->forward('message', NULL, NULL, array('message' => $message));
+            $this->forward('message', null, null, array('message' => $message));
         }
 
         //first check the end time of the poll. if it has already passed, we only show the results.
-        if($simplePoll->getEndTime() != '')
-        {
+        if ($simplePoll->getEndTime() != '') {
             $endTime = (int)$simplePoll->getEndTime()->format('U');
             $currentTime = time();
 
-            if($currentTime > $endTime)
-            {
-                $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
+            if ($currentTime > $endTime) {
+                $this->forward('seeVotes', 'SimplePoll', null, array('simplePoll' => $simplePoll));
             }
         }
 
         // if a user already voted and currently is not allowed to do so again, we forward him directly to the result
         // this can only happen, if showResultAfterVote is set to true, otherwise we have to stick to the old behaviour and display the question.
         // get the settings for show results after vote either global or local
-        if($this->settings['useTyposcriptSettings'] == 'true' || $this->settings['useTyposcriptSettings'] == '1') {
+        if ($this->settings['useTyposcriptSettings'] == 'true' || $this->settings['useTyposcriptSettings'] == '1') {
             $showResultAfterVote = $this->settings['showResultAfterVote'];
         } else {
             $showResultAfterVote = $simplePoll->getShowResultAfterVote();
         }
 
-        if(strtolower($showResultAfterVote) == 'true' || $showResultAfterVote == '1') {
+        if (strtolower($showResultAfterVote) == 'true' || $showResultAfterVote == '1') {
             $showResultIfNotAllowedToVote = $this->settings['showResultIfNotAllowedToVote'];
             if (strtolower($showResultIfNotAllowedToVote) == 'true' || $showResultIfNotAllowedToVote == '1') {
                 // check if a vote is allowed by the users IP
                 // IP check always overrules cookie check
-                $checkVoteOkFromIp = $this->checkVoteOkFromIp($simplePoll, TRUE);
-                if ($checkVoteOkFromIp !== TRUE) {
-                    $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
+                $checkVoteOkFromIp = $this->checkVoteOkFromIp($simplePoll, true);
+                if ($checkVoteOkFromIp !== true) {
+                    $this->forward('seeVotes', 'SimplePoll', null, array('simplePoll' => $simplePoll));
                 }
 
                 // check if a vote is allowed by the users cookies
-                $checkVoteOkFromCookie = $this->checkVoteOkFromCookie($simplePoll, TRUE);
-                if ($checkVoteOkFromCookie !== TRUE) {
-                    $this->forward('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
+                $checkVoteOkFromCookie = $this->checkVoteOkFromCookie($simplePoll, true);
+                if ($checkVoteOkFromCookie !== true) {
+                    $this->forward('seeVotes', 'SimplePoll', null, array('simplePoll' => $simplePoll));
                 }
             }
         }
 
-        // when using $answer = $simplePoll->getAnswers(), the sorting is always by UID
-        $answers = $simplePoll->getSortedAnswers();
+        $answers = $simplePoll->getAnswers();
 
         $this->view->assign('simplePoll', $simplePoll);
         $this->view->assign('answers', $answers);
     }
 
     /**
-     * message action 
-     * 
+     * message action
+     *
      * output messages belonging to the poll
      * @param string $message
      */
@@ -150,19 +149,16 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 
     /**
      * vote action
-     * 
+     *
      * count the votes if the vote is allowed by the settings and the current state of the user concerning his last vote
-     * 
+     *
      * @param \Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll
      */
     public function voteAction(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll)
     {
-        if($this->request->hasArgument('simplePollRadio'))
-        {
+        if ($this->request->hasArgument('simplePollRadio')) {
             $voteId = $this->request->getArgument('simplePollRadio');
-        }
-        else
-        {
+        } else {
             $this->redirectWithPageType('list');
         }
 
@@ -170,46 +166,36 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         // IP check always overrules cookie check
         $checkVoteOkFromIp = $this->checkVoteOkFromIp($simplePoll);
 
-        if($checkVoteOkFromIp !== TRUE)
-        {
-            $this->redirectWithPageType('message', NULL, NULL, array('message' => $checkVoteOkFromIp));
+        if ($checkVoteOkFromIp !== true) {
+            $this->redirectWithPageType('message', null, null, array('message' => $checkVoteOkFromIp));
         }
 
         // check if a vote is allowed by the users cookies
         $checkVoteOkFromCookie = $this->checkVoteOkFromCookie($simplePoll);
-        if($checkVoteOkFromCookie !== TRUE)
-        {
-            $this->redirectWithPageType('message', NULL, NULL, array('message' => $checkVoteOkFromCookie));
+        if ($checkVoteOkFromCookie !== true) {
+            $this->redirectWithPageType('message', null, null, array('message' => $checkVoteOkFromCookie));
         }
 
-        if($voteId)
-        {
+        if ($voteId) {
             $currentAnswer = $this->answerRepository->findByUid($voteId);
-            if($currentAnswer)
-            {
+            if ($currentAnswer) {
                 $currentAnswer->setCounter($currentAnswer->getCounter() + 1);
             }
         }
         $this->answerRepository->update($currentAnswer);
 
         // get the settings for show results after vote either global or local
-        if($this->settings['useTyposcriptSettings'] == 'true' || $this->settings['useTyposcriptSettings'] == '1')
-        {
+        if ($this->settings['useTyposcriptSettings'] == 'true' || $this->settings['useTyposcriptSettings'] == '1') {
             $showResultAfterVote = $this->settings['showResultAfterVote'];
-        }
-        else
-        {
+        } else {
             $showResultAfterVote = $simplePoll->getShowResultAfterVote();
         }
 
-        if($showResultAfterVote)
-        {
-            $this->redirectWithPageType('seeVotes', 'SimplePoll', NULL, array('simplePoll' => $simplePoll));
-        }
-        else
-        {
+        if ($showResultAfterVote) {
+            $this->redirectWithPageType('seeVotes', 'SimplePoll', null, array('simplePoll' => $simplePoll));
+        } else {
             $message = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_simplepoll.votedDontSeeResultsMessage', 'Simplepoll');
-            $this->redirectWithPageType('message', NULL, NULL, array('message' => $message));
+            $this->redirectWithPageType('message', null, null, array('message' => $message));
         }
     }
 
@@ -222,56 +208,46 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      *
      * @param \Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll
      * @param boolean $onlyCheck
-     * @return mixed TRUE if the user is allowed to vote, string with the error message if not
+     * @return mixed true if the user is allowed to vote, string with the error message if not
      */
     protected function checkVoteOkFromCookie(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll, $onlyCheck = false)
     {
         // get the settings for cookie blocking
         $cookieBlock = $this->settings['cookieBlock'];
-        if(! (strtolower($cookieBlock) == 'true' || $cookieBlock == '1'))
-        {
+        if (!(strtolower($cookieBlock) == 'true' || $cookieBlock == '1')) {
             // cookies are not blocked, so the user can vote
-            return TRUE;
+            return true;
         }
 
         // get the settings for multiple votes either global or local
-        if($this->settings['useTyposcriptSettings'] == 'true' || $this->settings['useTyposcriptSettings'] == '1')
-        {
+        if ($this->settings['useTyposcriptSettings'] == 'true' || $this->settings['useTyposcriptSettings'] == '1') {
             $allowMultipleVote = $this->settings['allowMultipleVote'];
-        }
-        else
-        {
+        } else {
             $allowMultipleVote = $simplePoll->getAllowMultipleVote();
         }
 
         // check if there already is a cookie. that would mean the user is not allowed to vote right now.
         $cookieExists = isset($_COOKIE['simplePoll-' . $simplePoll->getUid()]);
 
-        if($cookieExists)
-        {
-            if($allowMultipleVote)
-            {
+        if ($cookieExists) {
+            if ($allowMultipleVote) {
                 return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_simplepoll.voteNotNow', 'Simplepoll');
-            }
-            else
-            {
+            } else {
                 return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_simplepoll.voteOnlyOnce', 'Simplepoll');
             }
         }
-        if(!$onlyCheck)
-        {
+        if (!$onlyCheck) {
             // set the cookie for the current poll, so other polls won't be affected.
             // if multiple votes are not allowed we set the cookie valid for one month
             if ($allowMultipleVote) {
-                setcookie('simplePoll-' . $simplePoll->getUid(), time(), time() + $this->settings[ 'garbageCollectorInterval' ]);
+                setcookie('simplePoll-' . $simplePoll->getUid(), time(), time() + $this->settings['garbageCollectorInterval']);
             } else {
                 setcookie('simplePoll-' . $simplePoll->getUid(), time(), time() + 60 * 60 * 24 * 30);
             }
         }
 
-        return TRUE ;
+        return true;
     }
-
 
 
     /**
@@ -282,24 +258,20 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      *
      * @param \Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll
      * @param boolean $onlyCheck
-     * @return mixed TRUE if the user is allowed to vote, string with the error message if not
+     * @return mixed true if the user is allowed to vote, string with the error message if not
      */
     protected function checkVoteOkFromIp(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll, $onlyCheck = false)
     {
         $ipBlock = $this->settings['ipBlock'];
-        if(! (strtolower($ipBlock) == 'true' || $ipBlock == '1'))
-        {
+        if (!(strtolower($ipBlock) == 'true' || $ipBlock == '1')) {
             // IPs are not blocked, so the user can vote
-            return TRUE;
+            return true;
         }
 
         // get the settings for multiple votes either global or local
-        if($this->settings['useTyposcriptSettings'] == 'true' || $this->settings['useTyposcriptSettings'] == '1')
-        {
+        if ($this->settings['useTyposcriptSettings'] == 'true' || $this->settings['useTyposcriptSettings'] == '1') {
             $allowMultipleVote = $this->settings['allowMultipleVote'];
-        }
-        else
-        {
+        } else {
             $allowMultipleVote = $simplePoll->getAllowMultipleVote();
         }
 
@@ -309,32 +281,24 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         $userIp = $_SERVER['REMOTE_ADDR'];
         $lockedIp = $this->ipLockRepository->getIpInPoll($simplePoll, $userIp);
 
-        if($lockedIp)
-        {
+        if ($lockedIp) {
             // in here we know that the user already voted for this poll.
             // now we need to check if mutliple votes are allowed and if so, if enough time passed since the last vote.
-            if($allowMultipleVote)
-            {
+            if ($allowMultipleVote) {
                 //if the timestamp in the ip lock is not null, he is not allowed to vote again (yet)
                 $lockedIpTimestamp = $lockedIp->getTimestamp();
-                if($lockedIpTimestamp !== NULL)
-                {
+                if ($lockedIpTimestamp !== null) {
                     return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_simplepoll.voteNotNow', 'Simplepoll');
-                }
-                else
-                {
+                } else {
                     // vote is allowed, so we simply remove the current lock and let it create again down below
                     $simplePoll->removeIpLock($lockedIp);
                 }
-            }
-            else
-            {
+            } else {
                 //voted before and not allowed to vote again, because no multiple votes
                 return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_simplepoll.voteOnlyOnce', 'Simplepoll');
             }
         }
-        if (!$onlyCheck)
-        {
+        if (!$onlyCheck) {
             // first or allowed vote from this IP, so add the user to the ip lock list. return true because he is allowed to vote
             $ipLock = $this->objectManager->get('Pixelink\Simplepoll\Domain\Model\IpLock');
             $ipLock->setAddress($userIp);
@@ -342,7 +306,7 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
             $simplePoll->addIpLock($ipLock);
             $this->simplePollRepository->update($simplePoll);
         }
-        return TRUE;
+        return true;
     }
 
 
@@ -362,16 +326,13 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 
         // get all ip locks, which belong to the poll
         $ipLocks = $simplePoll->getIpLocks();
-        foreach($ipLocks as $ipLock)
-        {
+        foreach ($ipLocks as $ipLock) {
             $ipLockTime = $ipLock->getTimestamp();
-            if($ipLockTime !== null)
-            {
+            if ($ipLockTime !== null) {
                 $timeDelta = (int)$currentTime->format('U') - (int)$ipLockTime->format('U');
 
                 // if the iplock is older than the given setting value, we remove it
-                if($timeDelta > $garbageCollectorInterval)
-                {
+                if ($timeDelta > $garbageCollectorInterval) {
                     $simplePoll->removeIpLock($ipLock);
                 }
             }
@@ -389,22 +350,19 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      */
     public function seeVotesAction(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll)
     {
-        $allAnswers = $simplePoll->getSortedAnswers();
-        
+        $allAnswers = $simplePoll->getAnswers();
+
         // if all languages are meant to be added up, we get the needed counters here
-        if(! $this->settings['countLanguagesSeperately']) 
-        {
+        if (!$this->settings['countLanguagesSeperately']) {
             $allAnswers = $this->answerRepository->findAllLanguageAnswers($allAnswers);
         }
-        
+
         $answerCount = 0;
         $answersCountArray = array();
-        foreach($allAnswers as $answer)
-        {
+        foreach ($allAnswers as $answer) {
             $answerCount += $answer->getCounter();
         }
-        foreach($allAnswers as $answer)
-        {
+        foreach ($allAnswers as $answer) {
             //prevent division by zero for new polls.
             $answerCount = ($answerCount == 0) ? 1 : $answerCount;
             $answersCountArray[$answer->getUid()] = round((float)($answer->getCounter() / $answerCount) * 100, 2);
@@ -421,7 +379,7 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      *
      * returns a single array which holds all the needed informations to output the result in fluid
      *
-     * @param type $allAnswers 
+     * @param type $allAnswers
      * @param type $answersCountArray array of the answers with their perventage numbers
      * @return type array an array in which the key is the UID and the array items are title, percent and iteration (last is needed for the CSS class)
      */
@@ -430,8 +388,7 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         $answersArrayUnsorted = array();
         $iteration = 1;
 
-        foreach($allAnswers as $answer)
-        {
+        foreach ($allAnswers as $answer) {
             $answersArrayUnsorted[$answer->getUid()]['title'] = $answer->getTitle();
             $answersArrayUnsorted[$answer->getUid()]['counter'] = $answer->getCounter();
             $answersArrayUnsorted[$answer->getUid()]['percent'] = $answersCountArray[$answer->getUid()];
@@ -451,13 +408,12 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      * @param type $controller
      * @param type $arguments
      */
-    protected function redirectWithPageType($action, $controller = NULL, $extension = NULL, $arguments = NULL)
+    protected function redirectWithPageType($action, $controller = null, $extension = null, $arguments = null)
     {
         $pageType = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP("type");
-        if($pageType)
-        {
+        if ($pageType) {
             $this->uriBuilder->setRequest($this->request);
-            $this->uriBuilder->setTargetPageType($pageType); 
+            $this->uriBuilder->setTargetPageType($pageType);
             $uri = $this->uriBuilder->uriFor($action, $arguments, $controller, $extension);
             $this->redirectToURI($uri);
         }

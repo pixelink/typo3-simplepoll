@@ -10,7 +10,7 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
-        'dividers2tabs' => TRUE,
+        'dividers2tabs' => true,
         'versioningWS' => true,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -36,7 +36,7 @@ return [
 	'columns' => [
 
         'sys_language_uid' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config' => [
                 'type' => 'select',
@@ -54,7 +54,7 @@ return [
         ],
 		'l10n_parent' => [
 			'displayCond' => 'FIELD:sys_language_uid:>:0',
-			'exclude' => 1,
+			'exclude' => true,
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
 			'config' => [
 				'type' => 'select',
@@ -82,14 +82,14 @@ return [
 		],
 
 		'hidden' => [
-			'exclude' => 1,
+			'exclude' => true,
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
 			'config' => [
 				'type' => 'check',
 			],
 		],
 		'starttime' => [
-			'exclude' => 1,
+			'exclude' => true,
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
 			'config' => [
 				'type' => 'input',
@@ -107,7 +107,7 @@ return [
 			],
 		],
 		'endtime' => [
-			'exclude' => 1,
+			'exclude' => true,
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
 			'config' => [
 				'type' => 'input',
@@ -182,20 +182,21 @@ return [
 				'type' => 'inline',
 				'foreign_table' => 'tx_simplepoll_domain_model_answer',
 				'foreign_field' => 'simplepoll',
+				'foreign_sortby' => 'sorting',
 				'maxitems'      => 9999,
 				'appearance' => [
-					'collapseAll' => 1,
+					'collapseAll' => true,
 					'levelLinksPosition' => 'top',
-					'showSynchronizationLink' => 1,
-					'showPossibleLocalizationRecords' => 1,
+					'showSynchronizationLink' => true,
+					'showPossibleLocalizationRecords' => true,
 					'useSortable' => 1,
-					'showAllLocalizationLink' => 1
+					'showAllLocalizationLink' => true
 				],
 			],
 
 		],
 		'ip_locks' => [
-			'exclude' => 1,
+			'exclude' => true,
 			'label' => 'LLL:EXT:simplepoll/Resources/Private/Language/locallang_db.xlf:tx_simplepoll_domain_model_simplepoll.ip_locks',
 			'config' => [
 				'type' => 'inline',
@@ -203,11 +204,11 @@ return [
 				'foreign_field' => 'simplepoll',
 				'maxitems'      => 9999,
 				'appearance' => [
-					'collapseAll' => 1,
+					'collapseAll' => true,
 					'levelLinksPosition' => 'top',
-					'showSynchronizationLink' => 1,
-					'showPossibleLocalizationRecords' => 1,
-					'showAllLocalizationLink' => 1
+					'showSynchronizationLink' => true,
+					'showPossibleLocalizationRecords' => true,
+					'showAllLocalizationLink' => true
 				],
 			],
 		],

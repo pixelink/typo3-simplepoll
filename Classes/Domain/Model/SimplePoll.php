@@ -46,35 +46,35 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
 	 */
-	protected $image = NULL;
+	protected $image = null;
 
 	/**
 	 * End time of the poll
 	 *
 	 * @var \DateTime
 	 */
-	protected $endTime = NULL;
+	protected $endTime = null;
 
 	/**
 	 * Whether or not to display the show results button
 	 *
 	 * @var boolean
 	 */
-	protected $showResultLink = FALSE;
+	protected $showResultLink = false;
 
 	/**
 	 * Show the result after voting
 	 *
 	 * @var boolean
 	 */
-	protected $showResultAfterVote = FALSE;
+	protected $showResultAfterVote = false;
 
 	/**
 	 * If a user is allowed to vote several times
 	 *
 	 * @var boolean
 	 */
-	protected $allowMultipleVote = FALSE;
+	protected $allowMultipleVote = false;
 
 	/**
 	 * answers
@@ -83,7 +83,7 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @cascade remove
 	 * @lazy
 	 */
-	protected $answers = NULL;
+	protected $answers = null;
 
 	/**
 	 * Holds the IP addresses of the voters of the poll
@@ -92,7 +92,7 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @cascade remove
 	 * @lazy
 	 */
-	protected $ipLocks = NULL;
+	protected $ipLocks = null;
 
 	/**
 	 * __construct
@@ -283,27 +283,6 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getAnswers() {
         return $this->answers;
-	}
-
-    /**
-     * Returns the answers sorted by the "sorting" field in the database as an array
-     *
-     * @return array
-     */
-	public function getSortedAnswers() {
-        $answers = $this->answers;
-
-        foreach ($answers as $answer) {
-            $answersArray[] = $answer;
-        }
-
-        foreach ($answersArray as $key => $row)
-        {
-            $answersSorting[$key] = $row->getSorting();
-        }
-        array_multisort($answersSorting, SORT_ASC, $answersArray);
-
-        return $answersArray;
 	}
 
 	/**

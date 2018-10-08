@@ -46,7 +46,7 @@ class IpLock extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	 * @var \DateTime
 	 * @validate NotEmpty
 	 */
-	protected $timestamp = NULL;
+	protected $timestamp = null;
 
 	/**
 	 * Returns the address
@@ -82,7 +82,7 @@ class IpLock extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	 * @param \DateTime $timestamp
 	 * @return void
 	 */
-	public function setTimestamp(\DateTime $timestamp = NULL) {
+	public function setTimestamp(\DateTime $timestamp = null) {
 		$this->timestamp = $timestamp;
 	}
 
