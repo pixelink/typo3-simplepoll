@@ -1,7 +1,5 @@
 <?php
-if (!defined ('TYPO3_MODE')) {
-	die ('Access denied.');
-}
+defined('TYPO3_MODE') or die();
 
 return [
     'ctrl' => [
@@ -34,7 +32,6 @@ return [
 		'1' => ['showitem' => ''],
 	],
 	'columns' => [
-
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
@@ -59,6 +56,7 @@ return [
 			'config' => [
 				'type' => 'select',
 				'renderType' => 'selectSingle',
+                'default' => 0,
 				'items' => [
 					['', 0],
 				],
@@ -71,7 +69,6 @@ return [
 				'type' => 'passthrough',
 			],
 		],
-
 		't3ver_label' => [
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
 			'config' => [
@@ -80,7 +77,6 @@ return [
 				'max' => 255,
 			],
 		],
-
 		'hidden' => [
 			'exclude' => true,
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',

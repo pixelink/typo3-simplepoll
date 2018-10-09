@@ -129,20 +129,3 @@ CREATE TABLE tx_simplepoll_domain_model_iplock (
 
 );
 
-#
-# Table structure for table 'tx_simplepoll_domain_model_answer'
-#
-CREATE TABLE tx_simplepoll_domain_model_answer (
-
-	simplepoll  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);
-
-#
-# Table structure for table 'tx_simplepoll_domain_model_iplock'
-#
-CREATE TABLE tx_simplepoll_domain_model_iplock (
-
-	simplepoll  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);

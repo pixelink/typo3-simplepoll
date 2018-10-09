@@ -30,6 +30,7 @@ use Pixelink\Simplepoll\Domain\Repository\AnswerRepository;
 use Pixelink\Simplepoll\Domain\Repository\IpLockRepository;
 use Pixelink\Simplepoll\Domain\Repository\SimplePollRepository;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * SimplePollController

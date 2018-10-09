@@ -1,6 +1,6 @@
 <?php
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = [
 	'title' => 'Simple Poll',
 	'description' => 'An easy to setup and use poll system',
 	'category' => 'plugin',
@@ -14,11 +14,11 @@ $EM_CONF[$_EXTKEY] = array(
 	'version' => '3.0.0',
 	'constraints' => [
 		'depends' => [
-			'typo3' => '8.0.0-9.5.99',
+			'typo3' => '9.0.0-9.5.99',
 		],
 		'conflicts' => [
 		],
 		'suggests' => [
 		],
 	],
-);
+];
