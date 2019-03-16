@@ -89,8 +89,41 @@ Block multiple votes from one computer via cookies - ``[plugin.tx_simplepoll.set
 	Note that this method is a lot less secure than the IP block. If a cookie block is enabled a check is performed if the users browser accepts cookies.
 |
 
+Load simplepoll via Typoscript
+------------------------------
 
+You can load the simplepoll Plugin by using the following Typoscript lib:
 
+.. code-block:: typoscript
+
+	lib.loadSimplepoll = USER
+	lib.loadSimplepoll {
+		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+		extensionName = Simplepoll
+		pluginName = Polllisting
+		vendorName = Pixelink
+
+		switchableControllerActions {
+			SimplePoll {
+				1 = list
+			}
+		}
+
+		settings {
+			simplepoll {
+				useStdWrap := addToList(uid)
+				uid.current = 1
+			}
+		}
+	}
+
+Call ``lib.loadSimplepoll`` with the following code in your fluid template:
+
+.. code-block:: html
+
+	<f:cObject typoscriptObjectPath="lib.loadSimplepoll">2</f:cObject>
+
+This example will load the poll with the uid 2.
 
 
 
