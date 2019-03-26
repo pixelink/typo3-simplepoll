@@ -109,10 +109,11 @@ You can load the simplepoll Plugin by using the following Typoscript lib:
 			}
 		}
 
+        settings < plugin.tx_simplepoll.settings
 		settings {
 			simplepoll {
 				useStdWrap := addToList(uid)
-				uid.current = 1
+				uid = 1
 			}
 		}
 	}
