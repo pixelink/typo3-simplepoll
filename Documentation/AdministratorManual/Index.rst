@@ -77,8 +77,8 @@ Allow another vote after the garbageCollectorInterval has ended - ``[plugin.tx_s
 Use the jQuery from this extension - ``[plugin.tx_simplepoll.settings.useInternalJquery]``
 	Option to use the internal jQuery or the one already loaded by the site
 |
-Time in seconds before IP Locks are removed and a user can vote again if allowed - ``[plugin.tx_simplepoll.settings.garbageCollectorInterval]``
-	Time in seconds before IP Locks are removed and a user can vote again if allowed
+Time in seconds before IP/Cookie Locks are removed and a user can vote again if allowed - ``[plugin.tx_simplepoll.settings.garbageCollectorInterval]``
+	Time in seconds before IP/Cookie Locks are removed and a user can vote again if allowed
 |
 Block multiple votes from one IP address - ``[plugin.tx_simplepoll.settings.ipBlock]``
 	If you allow multiple votes, this decides whether to do the blocking by the users IP address. (IP block overrules cookie block)

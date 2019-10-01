@@ -253,9 +253,9 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
             // set the cookie for the current poll, so other polls won't be affected.
             // if multiple votes are not allowed we set the cookie valid for one month
             if ($allowMultipleVote) {
-                setcookie('simplePoll-' . $simplePoll->getUid(), time(), time() + $this->settings['garbageCollectorInterval']);
+                setcookie('simplePoll-' . $simplePoll->getUid(), time(), time() + $this->settings['garbageCollectorInterval'], '/');
             } else {
-                setcookie('simplePoll-' . $simplePoll->getUid(), time(), time() + 60 * 60 * 24 * 30);
+                setcookie('simplePoll-' . $simplePoll->getUid(), time(), time() + 60 * 60 * 24 * 30, '/');
             }
         }
 
