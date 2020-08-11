@@ -27,6 +27,9 @@ namespace Pixelink\Simplepoll\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade as Cascade;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy as Lazy;
 
 /**
  * SimplePoll
@@ -37,7 +40,7 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * The question of the poll
 	 *
 	 * @var string
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $question = '';
 
@@ -80,8 +83,8 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * answers
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Pixelink\Simplepoll\Domain\Model\Answer>
-	 * @cascade remove
-	 * @lazy
+	 * @Cascade remove
+	 * @Lazy
 	 */
 	protected $answers = null;
 
@@ -89,8 +92,8 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Holds the IP addresses of the voters of the poll
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Pixelink\Simplepoll\Domain\Model\IpLock>
-	 * @cascade remove
-	 * @lazy
+	 * @Cascade remove
+	 * @Lazy
 	 */
 	protected $ipLocks = null;
 
