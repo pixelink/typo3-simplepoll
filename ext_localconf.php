@@ -2,7 +2,7 @@
 defined('TYPO3_MODE') or die();
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'Pixelink.' . $_EXTKEY,
+	'Pixelink.simplepoll' ,
 	'Polllisting',
 	[
 		'SimplePoll' => 'list,vote,seeVotes,message',

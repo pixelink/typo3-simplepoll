@@ -87,6 +87,7 @@ class SimplePollController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      */
     public function listAction()
     {
+
         // Use stdWrap for settings.simplepoll.uid
         if (isset($this->settings['simplepoll']['useStdWrap']) && !empty($this->settings['simplepoll']['useStdWrap'])) {
             $typoScriptService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\TypoScript\TypoScriptService::class);
