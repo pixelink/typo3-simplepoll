@@ -27,6 +27,8 @@ namespace Pixelink\Simplepoll\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+
 /**
  * Stores the IPs of the voters with the timestamp of the vote
  */
@@ -36,7 +38,7 @@ class IpLock extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	 * the IP of the voter
 	 *
 	 * @var string
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $address = '';
 
@@ -44,7 +46,7 @@ class IpLock extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	 * timestamp
 	 *
 	 * @var \DateTime
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $timestamp = null;
 
