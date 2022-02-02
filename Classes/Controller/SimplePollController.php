@@ -432,12 +432,12 @@ class SimplePollController extends ActionController
      *
      * returns a single array which holds all the needed informations to output the result in fluid
      *
-     * @param SimplePoll $allAnswers
+     * @param array $allAnswers
      * @param array $answersCountArray array of the answers with their perventage numbers
      *
      * @return array array an array in which the key is the UID and the array items are title, percent and iteration (last is needed for the CSS class)
      */
-    protected function reformatAnswers(SimplePoll $allAnswers, array $answersCountArray): array
+    protected function reformatAnswers(array $allAnswers, array $answersCountArray): array
     {
         $answersArrayUnsorted = [];
         $iteration = 1;
