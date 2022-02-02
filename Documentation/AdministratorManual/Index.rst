@@ -77,8 +77,8 @@ Allow another vote after the garbageCollectorInterval has ended - ``[plugin.tx_s
 Use the jQuery from this extension - ``[plugin.tx_simplepoll.settings.useInternalJquery]``
 	Option to use the internal jQuery or the one already loaded by the site
 |
-Time in seconds before IP Locks are removed and a user can vote again if allowed - ``[plugin.tx_simplepoll.settings.garbageCollectorInterval]``
-	Time in seconds before IP Locks are removed and a user can vote again if allowed
+Time in seconds before IP/Cookie Locks are removed and a user can vote again if allowed - ``[plugin.tx_simplepoll.settings.garbageCollectorInterval]``
+	Time in seconds before IP/Cookie Locks are removed and a user can vote again if allowed
 |
 Block multiple votes from one IP address - ``[plugin.tx_simplepoll.settings.ipBlock]``
 	If you allow multiple votes, this decides whether to do the blocking by the users IP address. (IP block overrules cookie block)
@@ -89,8 +89,41 @@ Block multiple votes from one computer via cookies - ``[plugin.tx_simplepoll.set
 	Note that this method is a lot less secure than the IP block. If a cookie block is enabled a check is performed if the users browser accepts cookies.
 |
 
+Load simplepoll via Typoscript
+------------------------------
 
+You can load the simplepoll Plugin by using the following Typoscript lib:
 
+.. code-block:: typoscript
+
+	lib.loadSimplepoll = USER
+	lib.loadSimplepoll {
+		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+		extensionName = Simplepoll
+		pluginName = Polllisting
+		vendorName = Pixelink
+
+		switchableControllerActions {
+			SimplePoll {
+				1 = list
+			}
+		}
+
+		settings {
+			simplepoll {
+				useStdWrap := addToList(uid)
+				uid.current = 1
+			}
+		}
+	}
+
+Call ``lib.loadSimplepoll`` with the following code in your fluid template:
+
+.. code-block:: html
+
+	<f:cObject typoscriptObjectPath="lib.loadSimplepoll">2</f:cObject>
+
+This example will load the poll with the uid 2.
 
 
 

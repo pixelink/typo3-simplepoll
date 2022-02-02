@@ -1,4 +1,3 @@
-
 plugin.tx_simplepoll {
     view {
         templateRootPaths {
@@ -55,11 +54,11 @@ page {
     }
 }
 
-[globalVar = LIT:1 = {$plugin.tx_simplepoll.settings.useInternalJquery}]
+[{$plugin.tx_simplepoll.settings.useInternalJquery} == 1]
 page {
     includeJS {
         jQuery = http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js
-        jQuery.external = 1 
+        jQuery.external = 1
     }
 }
 [global]

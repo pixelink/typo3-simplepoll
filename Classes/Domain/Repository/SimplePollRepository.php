@@ -1,7 +1,6 @@
 <?php
 namespace Pixelink\Simplepoll\Domain\Repository;
 
-
 /***************************************************************
  *
  *  Copyright notice
@@ -27,10 +26,10 @@ namespace Pixelink\Simplepoll\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /**
  * The repository for SimplePolls
  */
-class SimplePollRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
-
-
-}
+class SimplePollRepository extends Repository
+{}

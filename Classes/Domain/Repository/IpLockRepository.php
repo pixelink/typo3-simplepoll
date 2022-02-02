@@ -1,7 +1,6 @@
 <?php
 namespace Pixelink\Simplepoll\Domain\Repository;
 
-
 /***************************************************************
  *
  *  Copyright notice
@@ -27,26 +26,35 @@ namespace Pixelink\Simplepoll\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Pixelink\Simplepoll\Domain\Model\SimplePoll;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /**
  * The repository for SimplePolls
  */
-class IpLockRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
-
-     public function getIpInPoll(\Pixelink\Simplepoll\Domain\Model\SimplePoll $simplePoll, $userIp)
-     {
+class IpLockRepository extends Repository
+{
+    /**
+     * @param SimplePoll $simplePoll
+     * @param $userIp
+     *
+     * @return object
+     */
+    public function getIpInPoll(SimplePoll $simplePoll, $userIp): object
+    {
         $query = $this->createQuery();
 
         $query->matching(
             $query->logicalAnd(
-                    $query->equals('simplepoll', $simplePoll->getUid()),
-                    $query->equals('address', $userIp)
+                $query->equals('simplepoll', $simplePoll->getUid()),
+                $query->equals('address', $userIp)
             )
         );
 
-        return $query->execute()->getFirst();         
-     }
-             
-	
+        return $query->execute()->getFirst();
+    }
+
+
 }
 
 

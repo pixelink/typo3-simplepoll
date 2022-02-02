@@ -2,7 +2,6 @@
 # Table structure for table 'tx_simplepoll_domain_model_simplepoll'
 #
 CREATE TABLE tx_simplepoll_domain_model_simplepoll (
-
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
@@ -40,15 +39,13 @@ CREATE TABLE tx_simplepoll_domain_model_simplepoll (
 	PRIMARY KEY (uid),
 	KEY parent (pid),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
- KEY language (l10n_parent,sys_language_uid)
-
+    KEY language (l10n_parent,sys_language_uid)
 );
 
 #
 # Table structure for table 'tx_simplepoll_domain_model_answer'
 #
 CREATE TABLE tx_simplepoll_domain_model_answer (
-
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
@@ -83,15 +80,13 @@ CREATE TABLE tx_simplepoll_domain_model_answer (
 	PRIMARY KEY (uid),
 	KEY parent (pid),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
- KEY language (l10n_parent,sys_language_uid)
-
+    KEY language (l10n_parent,sys_language_uid)
 );
 
 #
 # Table structure for table 'tx_simplepoll_domain_model_iplock'
 #
 CREATE TABLE tx_simplepoll_domain_model_iplock (
-
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
@@ -125,24 +120,6 @@ CREATE TABLE tx_simplepoll_domain_model_iplock (
 	PRIMARY KEY (uid),
 	KEY parent (pid),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
- KEY language (l10n_parent,sys_language_uid)
-
+    KEY language (l10n_parent,sys_language_uid)
 );
 
-#
-# Table structure for table 'tx_simplepoll_domain_model_answer'
-#
-CREATE TABLE tx_simplepoll_domain_model_answer (
-
-	simplepoll  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);
-
-#
-# Table structure for table 'tx_simplepoll_domain_model_iplock'
-#
-CREATE TABLE tx_simplepoll_domain_model_iplock (
-
-	simplepoll  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);

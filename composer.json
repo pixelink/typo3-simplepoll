@@ -1,0 +1,36 @@
+{
+  "name": "pixelink/simplepoll",
+  "type": "typo3-cms-extension",
+  "description": "An easy to setup and use poll system",
+  "license": ["GPL-2.0-or-later"],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/OpenSourceInternational/typo3-simplepoll.git",
+      "canonical": false
+    }
+  ],
+  "require": {
+    "typo3/cms-core": "^10.4 || ^11.4"
+  },
+  "authors": [
+    {
+      "name": "Alex Bigott",
+      "role": "Developer"
+    },
+    {
+      "name": "Benjamin Riezler",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Pixelink\\Simplepoll\\": "Classes"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "simplepoll"
+    }
+  }
+}

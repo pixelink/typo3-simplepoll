@@ -27,16 +27,21 @@ namespace Pixelink\Simplepoll\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+
 /**
  * SimplePoll
  */
-class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class SimplePoll extends AbstractEntity {
 
 	/**
 	 * The question of the poll
 	 *
 	 * @var string
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $question = '';
 
@@ -45,58 +50,56 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
 	 */
-	protected $image = NULL;
+	protected $image = null;
 
 	/**
 	 * End time of the poll
 	 *
 	 * @var \DateTime
 	 */
-	protected $endTime = NULL;
+	protected $endTime = null;
 
 	/**
 	 * Whether or not to display the show results button
 	 *
 	 * @var boolean
 	 */
-	protected $showResultLink = FALSE;
+	protected $showResultLink = false;
 
 	/**
 	 * Show the result after voting
 	 *
 	 * @var boolean
 	 */
-	protected $showResultAfterVote = FALSE;
+	protected $showResultAfterVote = false;
 
 	/**
 	 * If a user is allowed to vote several times
 	 *
 	 * @var boolean
 	 */
-	protected $allowMultipleVote = FALSE;
+	protected $allowMultipleVote = false;
 
 	/**
 	 * answers
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Pixelink\Simplepoll\Domain\Model\Answer>
-	 * @cascade remove
-	 * @lazy
+	 * @Cascade remove
+	 * @Lazy
 	 */
-	protected $answers = NULL;
+	protected $answers = null;
 
 	/**
 	 * Holds the IP addresses of the voters of the poll
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Pixelink\Simplepoll\Domain\Model\IpLock>
-	 * @cascade remove
-	 * @lazy
+	 * @Cascade remove
+	 * @Lazy
 	 */
-	protected $ipLocks = NULL;
+	protected $ipLocks = null;
 
-	/**
-	 * __construct
-	 */
-	public function __construct() {
+	public function __construct()
+    {
 		//Do not remove the next line: It would break the functionality
 		$this->initStorageObjects();
 	}
@@ -109,7 +112,8 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return void
 	 */
-	protected function initStorageObjects() {
+	protected function initStorageObjects(): void
+    {
 		$this->answers = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->ipLocks = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
@@ -119,7 +123,8 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return string $question
 	 */
-	public function getQuestion() {
+	public function getQuestion(): string
+    {
 		return $this->question;
 	}
 
@@ -127,9 +132,11 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the question
 	 *
 	 * @param string $question
+     *
 	 * @return void
 	 */
-	public function setQuestion($question) {
+	public function setQuestion(string $question): void
+    {
 		$this->question = $question;
 	}
 
@@ -138,7 +145,8 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
 	 */
-	public function getImage() {
+	public function getImage(): ?\TYPO3\CMS\Extbase\Domain\Model\FileReference
+    {
 		return $this->image;
 	}
 
@@ -146,9 +154,11 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the image
 	 *
 	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+     *
 	 * @return void
 	 */
-	public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image) {
+	public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image): void
+    {
 		$this->image = $image;
 	}
 
@@ -157,7 +167,8 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return \DateTime $endTime
 	 */
-	public function getEndTime() {
+	public function getEndTime(): ?\DateTime
+    {
 		return $this->endTime;
 	}
 
@@ -165,9 +176,11 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the endTime
 	 *
 	 * @param \DateTime $endTime
+     *
 	 * @return void
 	 */
-	public function setEndTime(\DateTime $endTime) {
+	public function setEndTime(\DateTime $endTime): void
+    {
 		$this->endTime = $endTime;
 	}
 
@@ -176,7 +189,8 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return boolean $showResultLink
 	 */
-	public function getShowResultLink() {
+	public function getShowResultLink(): bool
+    {
 		return $this->showResultLink;
 	}
 
@@ -184,9 +198,11 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the showResultLink
 	 *
 	 * @param boolean $showResultLink
+     *
 	 * @return void
 	 */
-	public function setShowResultLink($showResultLink) {
+	public function setShowResultLink(bool $showResultLink): void
+    {
 		$this->showResultLink = $showResultLink;
 	}
 
@@ -195,7 +211,8 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return boolean
 	 */
-	public function isShowResultLink() {
+	public function isShowResultLink(): bool
+    {
 		return $this->showResultLink;
 	}
 
@@ -204,7 +221,8 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return boolean $showResultAfterVote
 	 */
-	public function getShowResultAfterVote() {
+	public function getShowResultAfterVote(): bool
+    {
 		return $this->showResultAfterVote;
 	}
 
@@ -212,9 +230,11 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the showResultAfterVote
 	 *
 	 * @param boolean $showResultAfterVote
+     *
 	 * @return void
 	 */
-	public function setShowResultAfterVote($showResultAfterVote) {
+	public function setShowResultAfterVote(bool $showResultAfterVote): void
+    {
 		$this->showResultAfterVote = $showResultAfterVote;
 	}
 
@@ -223,7 +243,8 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return boolean
 	 */
-	public function isShowResultAfterVote() {
+	public function isShowResultAfterVote(): bool
+    {
 		return $this->showResultAfterVote;
 	}
 
@@ -232,7 +253,8 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return boolean $allowMultipleVote
 	 */
-	public function getAllowMultipleVote() {
+	public function getAllowMultipleVote(): bool
+    {
 		return $this->allowMultipleVote;
 	}
 
@@ -240,9 +262,11 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the allowMultipleVote
 	 *
 	 * @param boolean $allowMultipleVote
+     *
 	 * @return void
 	 */
-	public function setAllowMultipleVote($allowMultipleVote) {
+	public function setAllowMultipleVote(bool $allowMultipleVote): void
+    {
 		$this->allowMultipleVote = $allowMultipleVote;
 	}
 
@@ -251,7 +275,8 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return boolean
 	 */
-	public function isAllowMultipleVote() {
+	public function isAllowMultipleVote(): bool
+    {
 		return $this->allowMultipleVote;
 	}
 
@@ -259,9 +284,11 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Adds a Answer
 	 *
 	 * @param \Pixelink\Simplepoll\Domain\Model\Answer $answer
+     *
 	 * @return void
 	 */
-	public function addAnswer(\Pixelink\Simplepoll\Domain\Model\Answer $answer) {
+	public function addAnswer(\Pixelink\Simplepoll\Domain\Model\Answer $answer): void
+    {
 		$this->answers->attach($answer);
 	}
 
@@ -269,9 +296,11 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Removes a Answer
 	 *
 	 * @param \Pixelink\Simplepoll\Domain\Model\Answer $answerToRemove The Answer to be removed
+     *
 	 * @return void
 	 */
-	public function removeAnswer(\Pixelink\Simplepoll\Domain\Model\Answer $answerToRemove) {
+	public function removeAnswer(\Pixelink\Simplepoll\Domain\Model\Answer $answerToRemove): void
+    {
 		$this->answers->detach($answerToRemove);
 	}
 
@@ -280,17 +309,20 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Pixelink\Simplepoll\Domain\Model\Answer> $answers
 	 */
-	public function getAnswers() {
-            return $this->answers;
+	public function getAnswers(): ?\TYPO3\CMS\Extbase\Persistence\ObjectStorage
+    {
+        return $this->answers;
 	}
 
 	/**
 	 * Sets the answers
 	 *
 	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Pixelink\Simplepoll\Domain\Model\Answer> $answers
+     *
 	 * @return void
 	 */
-	public function setAnswers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $answers) {
+	public function setAnswers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $answers): void
+    {
 		$this->answers = $answers;
 	}
 
@@ -298,9 +330,11 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Adds a IpLock
 	 *
 	 * @param \Pixelink\Simplepoll\Domain\Model\IpLock $ipLock
+     *
 	 * @return void
 	 */
-	public function addIpLock(\Pixelink\Simplepoll\Domain\Model\IpLock $ipLock) {
+	public function addIpLock(\Pixelink\Simplepoll\Domain\Model\IpLock $ipLock): void
+    {
 		$this->ipLocks->attach($ipLock);
 	}
 
@@ -308,9 +342,11 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Removes a IpLock
 	 *
 	 * @param \Pixelink\Simplepoll\Domain\Model\IpLock $ipLockToRemove The IpLock to be removed
+     *
 	 * @return void
 	 */
-	public function removeIpLock(\Pixelink\Simplepoll\Domain\Model\IpLock $ipLockToRemove) {
+	public function removeIpLock(\Pixelink\Simplepoll\Domain\Model\IpLock $ipLockToRemove): void
+    {
 		$this->ipLocks->detach($ipLockToRemove);
 	}
 
@@ -319,7 +355,8 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Pixelink\Simplepoll\Domain\Model\IpLock> $ipLocks
 	 */
-	public function getIpLocks() {
+	public function getIpLocks(): ?\TYPO3\CMS\Extbase\Persistence\ObjectStorage
+    {
 		return $this->ipLocks;
 	}
 
@@ -327,9 +364,11 @@ class SimplePoll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the ipLocks
 	 *
 	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Pixelink\Simplepoll\Domain\Model\IpLock> $ipLocks
+     *
 	 * @return void
 	 */
-	public function setIpLocks(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $ipLocks) {
+	public function setIpLocks(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $ipLocks): void
+    {
 		$this->ipLocks = $ipLocks;
 	}
 

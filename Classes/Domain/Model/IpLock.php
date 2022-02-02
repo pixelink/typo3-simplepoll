@@ -27,16 +27,19 @@ namespace Pixelink\Simplepoll\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractValueObject;
+
 /**
  * Stores the IPs of the voters with the timestamp of the vote
  */
-class IpLock extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
-
+class IpLock extends AbstractValueObject
+{
 	/**
 	 * the IP of the voter
 	 *
 	 * @var string
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $address = '';
 
@@ -44,16 +47,17 @@ class IpLock extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	 * timestamp
 	 *
 	 * @var \DateTime
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
-	protected $timestamp = NULL;
+	protected $timestamp = null;
 
 	/**
 	 * Returns the address
 	 *
 	 * @return string $address
 	 */
-	public function getAddress() {
+	public function getAddress(): string
+    {
 		return $this->address;
 	}
 
@@ -61,9 +65,11 @@ class IpLock extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	 * Sets the address
 	 *
 	 * @param string $address
+     *
 	 * @return void
 	 */
-	public function setAddress($address) {
+	public function setAddress($address): void
+    {
 		$this->address = $address;
 	}
 
@@ -72,7 +78,8 @@ class IpLock extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	 *
 	 * @return \DateTime $timestamp
 	 */
-	public function getTimestamp() {
+	public function getTimestamp(): ?\DateTime
+    {
 		return $this->timestamp;
 	}
 
@@ -80,10 +87,11 @@ class IpLock extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	 * Sets the timestamp
 	 *
 	 * @param \DateTime $timestamp
+     *
 	 * @return void
 	 */
-	public function setTimestamp(\DateTime $timestamp = NULL) {
+	public function setTimestamp(\DateTime $timestamp = null): void
+    {
 		$this->timestamp = $timestamp;
 	}
-
 }
