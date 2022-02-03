@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace Pixelink\Simplepoll\Controller;
 
 /***************************************************************
@@ -32,38 +34,5 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  * AnswerController
  */
 class AnswerController extends ActionController
-{}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{
+}

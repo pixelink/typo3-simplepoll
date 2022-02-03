@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace Pixelink\Simplepoll\Domain\Repository;
 
 /***************************************************************
@@ -53,60 +55,4 @@ class IpLockRepository extends Repository
 
         return $query->execute()->getFirst();
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

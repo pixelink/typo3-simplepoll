@@ -1,6 +1,7 @@
 <?php
-namespace Pixelink\Simplepoll\Controller;
+declare(strict_types = 1);
 
+namespace Pixelink\Simplepoll\Controller;
 
 /***************************************************************
  *
@@ -34,9 +35,9 @@ use Pixelink\Simplepoll\Domain\Repository\AnswerRepository;
 use Pixelink\Simplepoll\Domain\Repository\IpLockRepository;
 use Pixelink\Simplepoll\Domain\Repository\SimplePollRepository;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -155,7 +156,7 @@ class SimplePollController extends ActionController
 
         $this->view->assignMultiple([
             'simplePoll' => $simplePoll,
-            'answers' => $answers
+            'answers' => $answers,
         ]);
     }
 
@@ -203,7 +204,7 @@ class SimplePollController extends ActionController
         }
 
         if ($voteId !== null) {
-            $currentAnswer = $this->answerRepository->findByUid($voteId);
+            $currentAnswer = $this->answerRepository->findByUid((int)$voteId);
 
             if ($currentAnswer) {
                 $currentAnswer->setCounter($currentAnswer->getCounter() + 1);
@@ -235,7 +236,7 @@ class SimplePollController extends ActionController
      * user can vote again. if he votes and cookies are used, a cookie with the current timstamp is written
      *
      * @param SimplePoll $simplePoll
-     * @param boolean $onlyCheck
+     * @param bool $onlyCheck
      *
      * @return mixed true if the user is allowed to vote, string with the error message if not
      */
@@ -262,7 +263,6 @@ class SimplePollController extends ActionController
         $cookieExists = isset($_COOKIE['simplePoll-' . $simplePoll->getUid()]);
 
         if ($cookieExists) {
-
             if ($allowMultipleVote) {
                 return LocalizationUtility::translate('tx_simplepoll.voteNotNow', 'Simplepoll');
             } else {
@@ -271,19 +271,17 @@ class SimplePollController extends ActionController
         }
 
         if (!$onlyCheck) {
-
             // set the cookie for the current poll, so other polls won't be affected.
             // if multiple votes are not allowed we set the cookie valid for one month
             if ($allowMultipleVote) {
-                setcookie('simplePoll-' . $simplePoll->getUid(), time(), time() + $this->settings['garbageCollectorInterval'], '/');
+                setcookie('simplePoll-' . $simplePoll->getUid(), (string)time(), time() + $this->settings['garbageCollectorInterval'], '/');
             } else {
-                setcookie('simplePoll-' . $simplePoll->getUid(), time(), time() + 60 * 60 * 24 * 30, '/');
+                setcookie('simplePoll-' . $simplePoll->getUid(), (string)time(), time() + 60 * 60 * 24 * 30, '/');
             }
         }
 
         return true;
     }
-
 
     /**
      * check vote ok from ip
@@ -292,7 +290,7 @@ class SimplePollController extends ActionController
      * and calls the garbage collector if the ipBlock is activated via typoscript.
      *
      * @param SimplePoll $simplePoll
-     * @param boolean $onlyCheck
+     * @param bool $onlyCheck
      *
      * @return mixed true if the user is allowed to vote, string with the error message if not
      */
@@ -321,11 +319,9 @@ class SimplePollController extends ActionController
         $lockedIp = $this->ipLockRepository->getIpInPoll($simplePoll, $userIp);
 
         if ($lockedIp) {
-
             // in here we know that the user already voted for this poll.
             // now we need to check if mutliple votes are allowed and if so, if enough time passed since the last vote.
             if ($allowMultipleVote) {
-
                 //if the timestamp in the ip lock is not null, he is not allowed to vote again (yet)
                 $lockedIpTimestamp = $lockedIp->getTimestamp();
 
@@ -352,7 +348,6 @@ class SimplePollController extends ActionController
 
         return true;
     }
-
 
     /**
      * cleanup IP locks

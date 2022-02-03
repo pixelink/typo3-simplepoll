@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Pixelink\Simplepoll\Tests\Unit\Domain\Model;
 
@@ -34,63 +35,70 @@ namespace Pixelink\Simplepoll\Tests\Unit\Domain\Model;
  *
  * @author Alex Bigott <support@pixel-ink.de>
  */
-class AnswerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
-	/**
-	 * @var \Pixelink\Simplepoll\Domain\Model\Answer
-	 */
-	protected $subject = NULL;
+class AnswerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
+    /**
+     * @var \Pixelink\Simplepoll\Domain\Model\Answer
+     */
+    protected $subject = null;
 
-	protected function setUp() {
-		$this->subject = new \Pixelink\Simplepoll\Domain\Model\Answer();
-	}
+    protected function setUp()
+    {
+        $this->subject = new \Pixelink\Simplepoll\Domain\Model\Answer();
+    }
 
-	protected function tearDown() {
-		unset($this->subject);
-	}
+    protected function tearDown()
+    {
+        unset($this->subject);
+    }
 
-	/**
-	 * @test
-	 */
-	public function getTitleReturnsInitialValueForString() {
-		$this->assertSame(
-			'',
-			$this->subject->getTitle()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getTitleReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->subject->getTitle()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setTitleForStringSetsTitle() {
-		$this->subject->setTitle('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setTitleForStringSetsTitle()
+    {
+        $this->subject->setTitle('Conceived at T3CON10');
 
-		$this->assertAttributeEquals(
-			'Conceived at T3CON10',
-			'title',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            'Conceived at T3CON10',
+            'title',
+            $this->subject
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getCounterReturnsInitialValueForInteger() {
-		$this->assertSame(
-			0,
-			$this->subject->getCounter()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getCounterReturnsInitialValueForInteger()
+    {
+        $this->assertSame(
+            0,
+            $this->subject->getCounter()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setCounterForIntegerSetsCounter() {
-		$this->subject->setCounter(12);
+    /**
+     * @test
+     */
+    public function setCounterForIntegerSetsCounter()
+    {
+        $this->subject->setCounter(12);
 
-		$this->assertAttributeEquals(
-			12,
-			'counter',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            12,
+            'counter',
+            $this->subject
+        );
+    }
 }

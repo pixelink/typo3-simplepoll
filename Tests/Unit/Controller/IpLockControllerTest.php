@@ -1,10 +1,13 @@
 <?php
+declare(strict_types = 1);
+
 namespace Pixelink\Simplepoll\Tests\Unit\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2014 Alex Bigott <support@pixel-ink.de>, Pixel Ink
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,36 +32,39 @@ namespace Pixelink\Simplepoll\Tests\Unit\Controller;
  *
  * @author Alex Bigott <support@pixel-ink.de>
  */
-class IpLockControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class IpLockControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
+    /**
+     * @var \Pixelink\Simplepoll\Controller\IpLockController
+     */
+    protected $subject = null;
 
-	/**
-	 * @var \Pixelink\Simplepoll\Controller\IpLockController
-	 */
-	protected $subject = NULL;
+    protected function setUp()
+    {
+        $this->subject = $this->getMock('Pixelink\\Simplepoll\\Controller\\IpLockController', array('redirect', 'forward', 'addFlashMessage'), array(), '', false);
+    }
 
-	protected function setUp() {
-		$this->subject = $this->getMock('Pixelink\\Simplepoll\\Controller\\IpLockController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
-	}
+    protected function tearDown()
+    {
+        unset($this->subject);
+    }
 
-	protected function tearDown() {
-		unset($this->subject);
-	}
+    /**
+     * @test
+     */
+    public function listActionFetchesAllIpLocksFromRepositoryAndAssignsThemToView()
+    {
 
-	/**
-	 * @test
-	 */
-	public function listActionFetchesAllIpLocksFromRepositoryAndAssignsThemToView() {
+        $allIpLocks = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
 
-		$allIpLocks = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+        $ipLockRepository = $this->getMock('', array('findAll'), array(), '', false);
+        $ipLockRepository->expects($this->once())->method('findAll')->will($this->returnValue($allIpLocks));
+        $this->inject($this->subject, 'ipLockRepository', $ipLockRepository);
 
-		$ipLockRepository = $this->getMock('', array('findAll'), array(), '', FALSE);
-		$ipLockRepository->expects($this->once())->method('findAll')->will($this->returnValue($allIpLocks));
-		$this->inject($this->subject, 'ipLockRepository', $ipLockRepository);
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->once())->method('assign')->with('ipLocks', $allIpLocks);
+        $this->inject($this->subject, 'view', $view);
 
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->once())->method('assign')->with('ipLocks', $allIpLocks);
-		$this->inject($this->subject, 'view', $view);
-
-		$this->subject->listAction();
-	}
+        $this->subject->listAction();
+    }
 }

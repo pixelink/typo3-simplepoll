@@ -1,6 +1,7 @@
 <?php
-namespace Pixelink\Simplepoll\Domain\Repository;
+declare(strict_types = 1);
 
+namespace Pixelink\Simplepoll\Domain\Repository;
 
 /***************************************************************
  *
@@ -55,11 +56,11 @@ class AnswerRepository extends Repository
      * sum them up.
      * later an array like $allAnswers with the corrected count is returned
      *
-     * @param type $allAnswers
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $allAnswers
      *
      * @return array
      */
-    public function findAllLanguageAnswers($allAnswers): array
+    public function findAllLanguageAnswers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $allAnswers): array
     {
         $returnedAnswers = [];
 
@@ -101,7 +102,9 @@ class AnswerRepository extends Repository
             )
             ->execute();
 
-        if ($row = $answer->fetchAssociative()) {
+        $row = $answer->fetchAssociative();
+
+        if ($row) {
             return $row['counter'];
         }
 

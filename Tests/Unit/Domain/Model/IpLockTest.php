@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Pixelink\Simplepoll\Tests\Unit\Domain\Model;
 
@@ -34,64 +35,71 @@ namespace Pixelink\Simplepoll\Tests\Unit\Domain\Model;
  *
  * @author Alex Bigott <support@pixel-ink.de>
  */
-class IpLockTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
-	/**
-	 * @var \Pixelink\Simplepoll\Domain\Model\IpLock
-	 */
-	protected $subject = NULL;
+class IpLockTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
+    /**
+     * @var \Pixelink\Simplepoll\Domain\Model\IpLock
+     */
+    protected $subject = null;
 
-	protected function setUp() {
-		$this->subject = new \Pixelink\Simplepoll\Domain\Model\IpLock();
-	}
+    protected function setUp()
+    {
+        $this->subject = new \Pixelink\Simplepoll\Domain\Model\IpLock();
+    }
 
-	protected function tearDown() {
-		unset($this->subject);
-	}
+    protected function tearDown()
+    {
+        unset($this->subject);
+    }
 
-	/**
-	 * @test
-	 */
-	public function getAddressReturnsInitialValueForString() {
-		$this->assertSame(
-			'',
-			$this->subject->getAddress()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getAddressReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->subject->getAddress()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setAddressForStringSetsAddress() {
-		$this->subject->setAddress('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setAddressForStringSetsAddress()
+    {
+        $this->subject->setAddress('Conceived at T3CON10');
 
-		$this->assertAttributeEquals(
-			'Conceived at T3CON10',
-			'address',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            'Conceived at T3CON10',
+            'address',
+            $this->subject
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getTimestampReturnsInitialValueForDateTime() {
-		$this->assertEquals(
-			NULL,
-			$this->subject->getTimestamp()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getTimestampReturnsInitialValueForDateTime()
+    {
+        $this->assertEquals(
+            null,
+            $this->subject->getTimestamp()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setTimestampForDateTimeSetsTimestamp() {
-		$dateTimeFixture = new \DateTime();
-		$this->subject->setTimestamp($dateTimeFixture);
+    /**
+     * @test
+     */
+    public function setTimestampForDateTimeSetsTimestamp()
+    {
+        $dateTimeFixture = new \DateTime();
+        $this->subject->setTimestamp($dateTimeFixture);
 
-		$this->assertAttributeEquals(
-			$dateTimeFixture,
-			'timestamp',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            $dateTimeFixture,
+            'timestamp',
+            $this->subject
+        );
+    }
 }

@@ -1,6 +1,7 @@
 <?php
-namespace Pixelink\Simplepoll\Domain\Model;
+declare(strict_types = 1);
 
+namespace Pixelink\Simplepoll\Domain\Model;
 
 /***************************************************************
  *
@@ -35,63 +36,63 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractValueObject;
  */
 class IpLock extends AbstractValueObject
 {
-	/**
-	 * the IP of the voter
-	 *
-	 * @var string
-	 * @Extbase\Validate("NotEmpty")
-	 */
-	protected $address = '';
-
-	/**
-	 * timestamp
-	 *
-	 * @var \DateTime
-	 * @Extbase\Validate("NotEmpty")
-	 */
-	protected $timestamp = null;
-
-	/**
-	 * Returns the address
-	 *
-	 * @return string $address
-	 */
-	public function getAddress(): string
-    {
-		return $this->address;
-	}
-
-	/**
-	 * Sets the address
-	 *
-	 * @param string $address
+    /**
+     * the IP of the voter
      *
-	 * @return void
-	 */
-	public function setAddress($address): void
-    {
-		$this->address = $address;
-	}
+     * @var string
+     * @Extbase\Validate("NotEmpty")
+     */
+    protected $address = '';
 
-	/**
-	 * Returns the timestamp
-	 *
-	 * @return \DateTime $timestamp
-	 */
-	public function getTimestamp(): ?\DateTime
-    {
-		return $this->timestamp;
-	}
-
-	/**
-	 * Sets the timestamp
-	 *
-	 * @param \DateTime $timestamp
+    /**
+     * timestamp
      *
-	 * @return void
-	 */
-	public function setTimestamp(\DateTime $timestamp = null): void
+     * @var \DateTime
+     * @Extbase\Validate("NotEmpty")
+     */
+    protected $timestamp = null;
+
+    /**
+     * Returns the address
+     *
+     * @return string $address
+     */
+    public function getAddress(): string
     {
-		$this->timestamp = $timestamp;
-	}
+        return $this->address;
+    }
+
+    /**
+     * Sets the address
+     *
+     * @param string $address
+     *
+     * @return void
+     */
+    public function setAddress($address): void
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * Returns the timestamp
+     *
+     * @return \DateTime $timestamp
+     */
+    public function getTimestamp(): ?\DateTime
+    {
+        return $this->timestamp;
+    }
+
+    /**
+     * Sets the timestamp
+     *
+     * @param \DateTime $timestamp
+     *
+     * @return void
+     */
+    public function setTimestamp(\DateTime $timestamp = null): void
+    {
+        $this->timestamp = $timestamp;
+    }
 }
