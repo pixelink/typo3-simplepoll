@@ -1,4 +1,3 @@
-
 plugin.tx_simplepoll {
     view {
         # cat=plugin.tx_simplepoll/file; type=string; label=Path to template root (FE)

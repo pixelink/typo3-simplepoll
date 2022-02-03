@@ -1,6 +1,7 @@
 <?php
-namespace Pixelink\Simplepoll\Domain\Repository;
+declare(strict_types = 1);
 
+namespace Pixelink\Simplepoll\Domain\Repository;
 
 /***************************************************************
  *
@@ -30,16 +31,21 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+use Pixelink\Simplepoll\Domain\Model\Answer;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /**
  * The repository for SimplePolls
  */
-class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class AnswerRepository extends Repository
 {
-
     /**
      * @var array
      */
-    protected $defaultOrderings = array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
+    protected $defaultOrderings = ['sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING];
 
     /**
      * @var string
@@ -53,12 +59,15 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * sum them up.
      * later an array like $allAnswers with the corrected count is returned
      *
-     * @param type $allAnswers
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $allAnswers
+     *
      * @return array
      */
-    public function findAllLanguageAnswers($allAnswers)
+    public function findAllLanguageAnswers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $allAnswers): array
     {
-        $returnedAnswers = array();
+        $returnedAnswers = [];
+
+        /** @var Answer $answer */
         foreach ($allAnswers as $answer) {
             $counterDefaultLanguage = $this->getCounterForUidDefaultLanguage($answer->getUid());
             $counterOtherLanguages = $this->getCounterForUidOtherLanguages($answer->getUid());
@@ -66,6 +75,7 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             $answer->setCounter($counterDefaultLanguage + $counterOtherLanguages);
             $returnedAnswers[] = $answer;
         }
+
         return $returnedAnswers;
     }
 
@@ -78,9 +88,10 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * language handling is buggy and about to be changed in version 9 or 10
      *
      * @param int $uid
+     *
      * @return int
      */
-    public function getCounterForUidDefaultLanguage($uid)
+    public function getCounterForUidDefaultLanguage(int $uid): int
     {
         /** @var QueryBuilder $queryBuilder */
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($this->answerTable);
@@ -94,9 +105,12 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             )
             ->execute();
 
-        if ($row = $answer->fetch()) {
+        $row = $answer->fetchAssociative();
+
+        if ($row) {
             return $row['counter'];
         }
+
         return 0;
     }
 
@@ -109,9 +123,10 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * language handling is buggy and about to be changed in version 9 or 10
      *
      * @param int $uid
+     *
      * @return int
      */
-    public function getCounterForUidOtherLanguages($uid)
+    public function getCounterForUidOtherLanguages(int $uid): int
     {
         /** @var QueryBuilder $queryBuilder */
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($this->answerTable);
@@ -127,11 +142,11 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // add up answers with other languages
         $languagesSum = 0;
-        while ($row = $answer->fetch()) {
+
+        while ($row = $answer->fetchAssociative()) {
             $languagesSum += $row['counter'];
         }
+
         return $languagesSum;
     }
-
-
 }
