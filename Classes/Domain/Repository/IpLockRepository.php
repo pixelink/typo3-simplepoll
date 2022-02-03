@@ -38,9 +38,9 @@ class IpLockRepository extends Repository
      * @param SimplePoll $simplePoll
      * @param string $userIp
      *
-     * @return object
+     * @return object|null
      */
-    public function getIpInPoll(SimplePoll $simplePoll, string $userIp): object
+    public function getIpInPoll(SimplePoll $simplePoll, string $userIp): ?object
     {
         $query = $this->createQuery();
 
