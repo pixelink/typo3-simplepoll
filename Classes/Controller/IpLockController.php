@@ -1,6 +1,7 @@
 <?php
-namespace Pixelink\Simplepoll\Controller;
+declare(strict_types = 1);
 
+namespace Pixelink\Simplepoll\Controller;
 
 /***************************************************************
  *
@@ -27,11 +28,11 @@ namespace Pixelink\Simplepoll\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+
 /**
  * IpLockController
  */
-class IpLockController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
-
-
-
+class IpLockController extends ActionController
+{
 }
