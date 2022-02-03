@@ -27,10 +27,6 @@ namespace Pixelink\Simplepoll\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\Annotation\ORM\Cascade as Cascade;
-use TYPO3\CMS\Extbase\Annotation\ORM\Lazy as Lazy;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;

@@ -4,8 +4,6 @@ declare(strict_types = 1);
 namespace Pixelink\Simplepoll\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\Annotation\ORM\Cascade as Cascade;
-use TYPO3\CMS\Extbase\Annotation\ORM\Lazy as Lazy;
 
 /**
  * All possible answers to the poll.
